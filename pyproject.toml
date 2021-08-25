@@ -1,0 +1,51 @@
+[tool.poetry]
+authors = ["ali92hm <ali@alihm.net>"]
+description = ""
+license = "MIT license"
+name = "cookiecutter-pyproject"
+version = "0.1.0"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+black = "^21.7b0"
+cookiecutter = "^1.7.3"
+flake8 = "^3.9.2"
+isort = "^5.9.3"
+mypy = "^0.910"
+pytest = "^6.2.4"
+pytest-cookies = "^0.6.1"
+pytest-cov = "^2.12.1"
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0"]
+
+[tool.isort]
+force_grid_wrap = 0
+include_trailing_comma = true
+multi_line_output = 3
+use_parentheses = true
+
+[tool.pytest.ini_options]
+addopts = "--basetemp=.generated --keep-baked-projects"
+testpaths = [
+  "tests",
+]
+
+[tool.black]
+exclude = ".generated"
+target-version = ['py39']
+
+[tool.mypy]
+check_untyped_defs = true 
+disallow_any_generics = true 
+disallow_untyped_defs = true 
+follow_imports = "silent" 
+ignore_errors = true # Dont fail the tests (for now)
+ignore_missing_imports = true 
+no_implicit_reexport = true 
+strict_optional = true 
+warn_redundant_casts = true 
+warn_unused_ignores = true

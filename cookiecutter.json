@@ -1,0 +1,6 @@
+{
+    "project_name": "Test project",
+    "project_name_snake_case": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
+    "project_name_kebab_case": "{{ cookiecutter.project_name_snake_case.replace('_', '-') }}",
+    "project_description": "Test python project"
+}
