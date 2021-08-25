@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "cookiecutter-pyproject"
+version = "0.1.0"
+description = ""
+authors = ["ali92hm <ali@alihm.net>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.4"
+cookiecutter = "^1.7.3"
+pytest-cookies = "^0.6.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+addopts = "--basetemp=.generated"
+testpaths = [
+    "tests"
+]
