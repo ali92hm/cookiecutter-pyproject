@@ -43,9 +43,12 @@ check_untyped_defs = true
 disallow_any_generics = true 
 disallow_untyped_defs = true 
 follow_imports = "silent" 
-ignore_errors = true # Dont fail the tests (for now)
+ignore_errors = true # Dont fail the tests (for now) delete this
 ignore_missing_imports = true 
 no_implicit_reexport = true 
 strict_optional = true 
 warn_redundant_casts = true 
-warn_unused_ignores = true
+warn_unused_ignores = true 
+
+# [mypy-tests.*]
+# ignore_errors = True
