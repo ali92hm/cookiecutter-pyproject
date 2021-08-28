@@ -1,13 +1,10 @@
 .PHONY: clean install
 .DEFAULT_GOAL:= install
 
-init: clean init/poetry install
+init: install
 
-init/poetry:
-	poetry env use python
-
-install: clean
-	poetry install
+install:
+	pip install -r requirements_dev.txt
 
 clean:
 	rm -rf .generated
@@ -19,15 +16,15 @@ clean:
 	find . -name '__pycache__' -exec rm -fr {} +
 
 check-style:
-	poetry run flake8 .
+	flake8 .
 
 fix-style:
-	poetry run black .
+	black .
 
 check-types:
-	poetry run mypy .
+	mypy .
 
 test:
-	poetry run pytest
+	pytest
 
 ci: check-style check-types test

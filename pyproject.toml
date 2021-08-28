@@ -1,14 +1,19 @@
-[tool.poetry]
+[project]
 authors = ["ali92hm <ali@alihm.net>"]
-description = ""
+description = "Create a pyproject.toml file for an existing project."
+documentation = "https://github.com/ali92hm/cookiecutter-pyproject/blob/master/README.md"
+keywords = ["cookiecutter", "python", "project", "generator"]
 license = "MIT license"
 name = "cookiecutter-pyproject"
+python = "^3.8"
+readme = "README.md"
+repository = "https://github.com/ali92hm/cookiecutter-pyproject"
 version = "0.1.0"
 
-[tool.poetry.dependencies]
+[dependencies]
 python = "^3.8"
 
-[tool.poetry.dev-dependencies]
+[dev-dependencies]
 black = "^21.7b0"
 cookiecutter = "^1.7.3"
 flake8 = "^3.9.2"
@@ -19,8 +24,10 @@ pytest-cookies = "^0.6.1"
 pytest-cov = "^2.12.1"
 
 [build-system]
-build-backend = "poetry.core.masonry.api"
-requires = ["poetry-core>=1.0.0"]
+build-backend = "setuptools.build_meta"
+requires = [
+  "setuptools >= 35.0.2",
+]
 
 [tool.isort]
 force_grid_wrap = 0
