@@ -1,10 +1,12 @@
+.PHONY: clean install
+.DEFAULT_GOAL:= install
 
-init:
-	clean
+init: clean init/poetry install
+
+init/poetry:
 	poetry env use python
-	install
 
-install:
+install: clean
 	poetry install
 
 clean:
@@ -28,7 +30,4 @@ check-types:
 test:
 	poetry run pytest
 
-ci-test:
-	check-style
-	check-types
-	test
+ci: check-style check-types test
