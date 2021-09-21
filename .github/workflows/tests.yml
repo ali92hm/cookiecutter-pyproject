@@ -8,6 +8,7 @@ on:
     types:
       - opened
       - synchronize
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
