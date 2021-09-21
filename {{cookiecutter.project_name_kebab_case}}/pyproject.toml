@@ -32,6 +32,9 @@ documentation = "github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.p
 homepage = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name_kebab_case }}"
 repository = "github.com"
 
+[project.scripts]
+{{ cookiecutter.project_name_snake_case }} = "{{ cookiecutter.project_name_snake_case }}.cli.entrypoint:main"
+
 [build-system]
 build-backend = "setuptools.build_meta"
 requires = [
@@ -47,13 +50,11 @@ multi_line_output = 3
 use_parentheses = true
 
 [tool.pytest.ini_options]
-addopts = "--basetemp=.generated --keep-baked-projects"
 testpaths = [
   "tests",
 ]
 
 [tool.black]
-exclude = ".generated"
 target-version = ['py39']
 
 [tool.mypy]
