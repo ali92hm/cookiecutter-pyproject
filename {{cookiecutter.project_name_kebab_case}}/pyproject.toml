@@ -1,0 +1,72 @@
+[project]
+authors = [
+  {name = "{{ cookiecutter.author_full_name }} ({{ cookiecutter.github_username }})", email = "{{ cookiecutter.author_email }}"},
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+]
+dependencies = [
+  # fill me
+]
+description = "{{ cookiecutter.project_description }}"
+keywords = [
+  # fill me
+]
+license = {file = "LICENSE"}
+maintainers = [
+  {name = "{{ cookiecutter.author_full_name }} ({{ cookiecutter.github_username }})", email = "{{ cookiecutter.author_email }}"},
+]
+name = "{{ cookiecutter.project_name_kebab_case }}"
+readme = "README.md"
+requires-python = ">=3.7"
+version = "0.1.0"
+
+[project.urls]
+changelog = "github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name_kebab_case }}/blob/master/CHANGELOG.md"
+documentation = "github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name_kebab_case }}/blob/master/README.md"
+homepage = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name_kebab_case }}"
+repository = "github.com"
+
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = [
+  "setuptools>=57",
+  "toml>=0.10",
+  "wheel>=0.36",
+]
+
+[tool.isort]
+force_grid_wrap = 0
+include_trailing_comma = true
+multi_line_output = 3
+use_parentheses = true
+
+[tool.pytest.ini_options]
+addopts = "--basetemp=.generated --keep-baked-projects"
+testpaths = [
+  "tests",
+]
+
+[tool.black]
+exclude = ".generated"
+target-version = ['py39']
+
+[tool.mypy]
+check_untyped_defs = true
+disallow_any_generics = true
+disallow_untyped_defs = true
+follow_imports = "silent"
+ignore_missing_imports = true
+no_implicit_reexport = true
+strict_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+ignore_errors = true
+module = "tests.*"
