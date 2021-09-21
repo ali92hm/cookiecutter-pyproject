@@ -4,7 +4,7 @@ def test_bake_project_with_defaults(cookies):
     assert result.exit_code == 0
     assert result.exception is None
 
-    assert result.project_path.name == "test-project"
+    assert result.project_path.name == "sample-project"
     assert result.project_path.is_dir()
 
 
