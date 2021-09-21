@@ -5,7 +5,6 @@ init:
 	pip install -r requirements.txt
 
 clean:
-	rm -rf .generated
 	rm -rf .mypy_cache
 	rm -rf .pytest_cache
 	rm -fr dist/

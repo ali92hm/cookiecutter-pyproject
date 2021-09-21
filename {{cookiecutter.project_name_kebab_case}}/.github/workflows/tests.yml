@@ -8,9 +8,9 @@ on:
     types:
       - opened
       - synchronize
+{% raw %}
 jobs:
   build:
-  {% raw %}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     strategy:
@@ -32,5 +32,5 @@ jobs:
           make ci
       - name: Build package
         run: |
-          make build
-  {% endraw %}
+          make Build
+{% endraw %}

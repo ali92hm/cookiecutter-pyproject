@@ -2,5 +2,5 @@ from {{ cookiecutter.project_name_snake_case }} import {{ cookiecutter.project_n
 
 
 def test_add():
-    res = {{ cookiecutter.project_name_snake_case }}.add(2, 5)
+    res = {{ cookiecutter.project_name_snake_case }}.add(2, 3)
     assert res == 5
