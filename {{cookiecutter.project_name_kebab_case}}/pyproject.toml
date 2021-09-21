@@ -9,6 +9,8 @@ classifiers = [
   "Programming Language :: Python :: 3.7",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
+  "License :: OSI Approved :: {{ cookiecutter.license }}",
+  "Operating System :: OS Independent",
 ]
 dependencies = [
   # fill me
@@ -32,7 +34,7 @@ documentation = "github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.p
 homepage = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name_kebab_case }}"
 repository = "github.com"
 
-[project.scripts]
+[project.entry-points]
 {{ cookiecutter.project_name_snake_case }} = "{{ cookiecutter.project_name_snake_case }}.cli.entrypoint:main"
 
 [build-system]
