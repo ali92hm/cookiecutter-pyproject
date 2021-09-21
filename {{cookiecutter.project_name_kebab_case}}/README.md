@@ -1,4 +1,4 @@
-# {{ cookiecutter.project_name_kebab_case }}
+# {{ cookiecutter.project_name }}
 
 {{ cookiecutter.project_description }}
 
