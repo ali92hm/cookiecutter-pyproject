@@ -14,7 +14,7 @@ classifiers = [
   "Operating System :: OS Independent",
 ]
 dependencies = []
-description = "Create a pyproject.toml file for an existing project."
+description = "A cookiecutter for generating a basic scaffolding for python projects"
 keywords = ["cookiecutter", "python", "project", "generator"]
 license = {file = "LICENSE"}
 maintainers = [
@@ -22,7 +22,7 @@ maintainers = [
 ]
 name = "cookiecutter-pyproject"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.7"
 version = "0.1.0"
 
 [project.urls]
