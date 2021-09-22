@@ -5,9 +5,7 @@ import toml
 
 def run_generated_project_assertions(generated_project, **kwargs):
     # These are the default values if no kwargs are given
-    project_name_raw = "Sample project"
-    project_name = "sample-project"
-    project_name_snake_case = "sample_project"
+    project_name = "Sample project"
     project_description = "Generated sample project from cookiecutter-pyproject"
     author_full_name = "Jane Doe"
     author_email = "jane.doe@example.com"
@@ -16,14 +14,11 @@ def run_generated_project_assertions(generated_project, **kwargs):
     license = "MIT License"
 
     # Replace these variables if an override is given
-    if "project_name_raw" in kwargs:
-        project_name_raw = kwargs["project_name_raw"]
-
     if "project_name" in kwargs:
         project_name = kwargs["project_name"]
 
-    if "project_name_snake_case" in kwargs:
-        project_name_snake_case = kwargs["project_name_snake_case"]
+    project_name_snake_case = project_name.lower().replace(" ", "_").replace("-", "_")
+    project_name_kebab_case = project_name.lower().replace(" ", "-").replace("_", "-")
 
     if "project_description" in kwargs:
         project_description = kwargs["project_description"]
@@ -44,9 +39,12 @@ def run_generated_project_assertions(generated_project, **kwargs):
         license = kwargs["license"]
 
     # Make sure correct context was passed to cookiecutter
-    assert generated_project.context["project_name"] == project_name_raw
+    assert generated_project.context["project_name"] == project_name
     assert (
         generated_project.context["project_name_snake_case"] == project_name_snake_case
+    )
+    assert (
+        generated_project.context["project_name_kebab_case"] == project_name_kebab_case
     )
     assert generated_project.context["project_description"] == project_description
     assert generated_project.context["author_full_name"] == author_full_name
@@ -55,12 +53,12 @@ def run_generated_project_assertions(generated_project, **kwargs):
     assert generated_project.context["project_repo"] == project_repo
     assert generated_project.context["license"] == license
     # This is so when new variables are added/removed we know to add tests for them :)
-    assert len(generated_project.context) == 8
+    assert len(generated_project.context) == 9
 
     # make sure the project was generated correctly
     assert generated_project.exit_code == 0
     assert generated_project.exception is None
-    assert generated_project.project_path.name == project_name
+    assert generated_project.project_path.name == project_name_kebab_case
     assert generated_project.project_path.is_dir()
 
     project_path = generated_project.project_path
@@ -131,12 +129,9 @@ def run_generated_project_assertions(generated_project, **kwargs):
         assert project_metadata["project"]["license"]["file"] == "LICENSE"
         # TODO check for OSI license in project_metadata["project"]["classifiers"]
 
+        assert project_name_kebab_case in project_metadata["project"]["entry-points"]
         assert (
-            project_name_snake_case.replace("_", "-")
-            in project_metadata["project"]["entry-points"]
-        )
-        assert (
-            project_metadata["project"]["entry-points"][project_name]
+            project_metadata["project"]["entry-points"][project_name_kebab_case]
             == f"{project_name_snake_case}.cli.entrypoint:main"
         )
 
@@ -156,29 +151,27 @@ def test_bake_project_with_defaults(cookies):
 
 
 def test_bake_project_with_custom_raw_name(cookies):
-    project_name_raw = "some Kool_proJect"
-    generated_project = cookies.bake(extra_context={"project_name": project_name_raw})
+    project_name = "some Kool_proJect"
+    generated_project = cookies.bake(extra_context={"project_name": project_name})
     run_generated_project_assertions(
         generated_project,
-        project_name_raw=project_name_raw,
-        project_name="some-kool-project",
-        project_name_snake_case="some_kool_project",
+        project_name=project_name,
         project_repo="https://github.com/janeDoe/some-kool-project",
     )
 
 
 # def test_bake_project_with_custom_snake_case_name(cookies):
-#     project_name_raw = "my project"
+#     project_name_input = "my project"
 #     project_snake_case = "my_project_2"
 #     generated_project = cookies.bake(
 #         extra_context={
-#             "project_name": project_name_raw,
+#             "project_name": project_name_input,
 #             "project_name_snake_case": project_snake_case,
 #         }
 #     )
 #     run_generated_project_assertions(
 #         generated_project,
-#         project_name_raw=project_name_raw,
+#         project_name_input=project_name_input,
 #         project_name="my-project",
 #         project_name_snake_case=project_snake_case,
 #         project_repo="https://github.com/janeDoe/my-project",
