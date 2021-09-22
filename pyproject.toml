@@ -52,7 +52,14 @@ testpaths = [
 ]
 
 [tool.black]
-exclude = ".generated"
+exclude = '''
+/(
+|dist
+|docs
+|.generated
+|{{cookiecutter.project_name_kebab_case}}
+)/
+'''
 target-version = ['py39']
 
 [tool.mypy]

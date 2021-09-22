@@ -56,6 +56,12 @@ testpaths = [
 ]
 
 [tool.black]
+exclude = '''
+/(
+|dist
+|docs
+)/
+'''
 target-version = ['py39']
 
 [tool.mypy]
