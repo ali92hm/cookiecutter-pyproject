@@ -10,7 +10,7 @@ on:
       - synchronize
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     strategy:
@@ -24,9 +24,12 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Setup project
+      - name: Initialize project
         run: |
           make init
       - name: Run ci tests
         run: |
           make ci
+      - name: Build package
+        run: |
+          make build
