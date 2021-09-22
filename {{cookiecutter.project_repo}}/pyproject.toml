@@ -28,9 +28,9 @@ requires-python = ">=3.7"
 version = "0.1.0"
 
 [project.urls]
-changelog = "https://github.com/{{ cookiecutter.github_organization }}/{{ cookiecutter.project_repo }}/blob/master/CHANGELOG.md"
-documentation = "https://github.com/{{ cookiecutter.github_organization }}/{{ cookiecutter.project_repo }}/blob/master/README.md"
-homepage = "https://github.com/{{ cookiecutter.github_organization }}/{{ cookiecutter.project_repo }}"
+changelog = "{{ cookiecutter.project_repo }}/blob/master/CHANGELOG.md"
+documentation = "{{ cookiecutter.project_repo }}/blob/master/README.md"
+homepage = "{{ cookiecutter.project_repo }}"
 repository = "github.com"
 
 [project.entry-points]
