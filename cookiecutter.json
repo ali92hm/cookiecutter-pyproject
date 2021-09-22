@@ -1,16 +1,15 @@
 {
     "project_name": "Sample project",
     "project_name_snake_case": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
-    "project_repo": "{{ cookiecutter.project_name_snake_case.replace('_', '-') }}",
     "project_description": "Generated sample project from cookiecutter-pyproject",
     "author_full_name": "Jane Doe",
     "author_email": "jane.doe@example.com",
-    "github_username": "janeDoe",
-    "github_organization": "{{ cookiecutter.github_username }}",
+    "github_organization": "janeDoe",
+    "project_repo": "https://github.com/{{ cookiecutter.github_organization }}/{{ cookiecutter.project_name_snake_case.replace('_', '-') }}",
     "license": [
-        "MIT license",
-        "BSD license",
-        "ISC license",
+        "MIT License",
+        "BSD License",
+        "ISC License",
         "Apache Software License 2.0",
         "GNU General Public License v3",
         "Not open source"
