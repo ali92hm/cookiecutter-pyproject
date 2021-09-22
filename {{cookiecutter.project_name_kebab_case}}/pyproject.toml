@@ -22,7 +22,7 @@ license = {file = "LICENSE"}
 maintainers = [
   {name = "{{ cookiecutter.author_full_name }}", email = "{{ cookiecutter.author_email }}"},
 ]
-name = "{{ cookiecutter.project_name_snake_case.replace('_', '-') }}"
+name = "{{ cookiecutter.project_name_kebab_case }}"
 readme = "README.md"
 requires-python = ">=3.7"
 version = "0.1.0"
@@ -34,7 +34,7 @@ homepage = "{{ cookiecutter.project_repo }}"
 repository = "github.com"
 
 [project.entry-points]
-{{ cookiecutter.project_name_snake_case.replace('_', '-') }} = "{{ cookiecutter.project_name_snake_case }}.cli.entrypoint:main"
+{{ cookiecutter.project_name_kebab_case }} = "{{ cookiecutter.project_name_snake_case }}.cli.entrypoint:main"
 
 [build-system]
 build-backend = "setuptools.build_meta"
