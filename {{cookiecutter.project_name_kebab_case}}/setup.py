@@ -16,7 +16,7 @@ with open(project_metadata["project"]["readme"]) as readme_file:
 with open(project_metadata["project"]["license"]["file"]) as license_file:
     license = license_file.readline().strip()
 
-src_folder = project_metadata["project"]["name"].replace('-', '_')
+src_folder = project_metadata["project"]["name"].replace("-", "_")
 packages = setuptools.find_packages(include=[src_folder, f"{src_folder}.*"])
 
 console_scripts = list()
