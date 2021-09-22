@@ -6,8 +6,9 @@ on:
     branches: master
     types:
       - completed
-{% raw %}
+
 jobs:
+{%- raw %}
   build-and-release:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
@@ -25,4 +26,4 @@ jobs:
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
-{% endraw %}
+{%- endraw %}
