@@ -86,9 +86,17 @@ def run_generated_project_assertions(generated_project, **kwargs):
     assert ".vscode" in toplevel_files
     assert project_name_snake_case in toplevel_files
 
-    # Check files in project_name_snake_case
+    # Check files in source project files
+    src_files = os.listdir(os.path.join(project_path, project_name_snake_case))
+    assert "cli" in src_files
+    assert "__init__.py" in src_files
+    assert "__main__.py" in src_files
+    assert f"{project_name_snake_case}.py" in src_files
 
-    # TODO: Check files in test folder
+    # Check files in test folder
+    test_files = os.listdir(os.path.join(project_path, "tests"))
+    assert "__init__.py" in test_files
+    assert f"test_{project_name_snake_case}.py" in test_files
 
     # Check readme
     with open(os.path.join(project_path, "README.md"), "r") as readme_file:
@@ -101,30 +109,35 @@ def run_generated_project_assertions(generated_project, **kwargs):
     with open(os.path.join(project_path, "pyproject.toml"), "r") as pyproj_file:
         project_metadata = toml.load(pyproj_file)
 
-        assert project_name == project_metadata["project"]["name"]
-        assert project_description == project_metadata["project"]["description"]
-        assert author_full_name == project_metadata["project"]["authors"][0]["name"]
-        assert author_email == project_metadata["project"]["authors"][0]["email"]
-        assert author_full_name == project_metadata["project"]["maintainers"][0]["name"]
-        assert author_email == project_metadata["project"]["maintainers"][0]["email"]
+        assert project_metadata["project"]["name"] == project_name_snake_case.replace(
+            "_", "-"
+        )
+        assert project_metadata["project"]["description"] == project_description
+        assert project_metadata["project"]["authors"][0]["name"] == author_full_name
+        assert project_metadata["project"]["authors"][0]["email"] == author_email
+        assert project_metadata["project"]["maintainers"][0]["name"] == author_full_name
+        assert project_metadata["project"]["maintainers"][0]["email"] == author_email
 
-        assert project_repo == project_metadata["project"]["urls"]["homepage"]
+        assert project_metadata["project"]["urls"]["homepage"] == project_repo
         assert (
-            f"{project_repo}/blob/master/CHANGELOG.md"
-            == project_metadata["project"]["urls"]["changelog"]
+            project_metadata["project"]["urls"]["changelog"]
+            == f"{project_repo}/blob/master/CHANGELOG.md"
         )
         assert (
-            f"{project_repo}/blob/master/README.md"
-            == project_metadata["project"]["urls"]["documentation"]
+            project_metadata["project"]["urls"]["documentation"]
+            == f"{project_repo}/blob/master/README.md"
         )
 
-        assert "LICENSE" == project_metadata["project"]["license"]["file"]
+        assert project_metadata["project"]["license"]["file"] == "LICENSE"
         # TODO check for OSI license in project_metadata["project"]["classifiers"]
 
-        assert project_name in project_metadata["project"]["entry-points"]
         assert (
-            f"{project_name_snake_case}.cli.entrypoint:main"
-            == project_metadata["project"]["entry-points"][project_name]
+            project_name_snake_case.replace("_", "-")
+            in project_metadata["project"]["entry-points"]
+        )
+        assert (
+            project_metadata["project"]["entry-points"][project_name]
+            == f"{project_name_snake_case}.cli.entrypoint:main"
         )
 
     # License file assertions
@@ -152,3 +165,21 @@ def test_bake_project_with_custom_raw_name(cookies):
         project_name_snake_case="some_kool_project",
         project_repo="https://github.com/janeDoe/some-kool-project",
     )
+
+
+# def test_bake_project_with_custom_snake_case_name(cookies):
+#     project_name_raw = "my project"
+#     project_snake_case = "my_project_2"
+#     generated_project = cookies.bake(
+#         extra_context={
+#             "project_name": project_name_raw,
+#             "project_name_snake_case": project_snake_case,
+#         }
+#     )
+#     run_generated_project_assertions(
+#         generated_project,
+#         project_name_raw=project_name_raw,
+#         project_name="my-project",
+#         project_name_snake_case=project_snake_case,
+#         project_repo="https://github.com/janeDoe/my-project",
+#     )
