@@ -2,10 +2,9 @@
 .DEFAULT_GOAL:= init
 
 init:
-	pip install -r requirements_dev.txt
+	pip install -r requirements.txt
 
 clean:
-	rm -rf .generated
 	rm -rf .mypy_cache
 	rm -rf .pytest_cache
 	rm -fr dist/
@@ -28,6 +27,9 @@ check-types:
 
 test:
 	pytest
+
+release:
+	twine upload dist/*
 
 build: clean
 	python setup.py sdist bdist_wheel --universal

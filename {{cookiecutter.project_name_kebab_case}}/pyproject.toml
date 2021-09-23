@@ -1,35 +1,40 @@
 [project]
 authors = [
-  {name = "Ali Hajimirza (ali92hm)", email = "ali@alihm.net"},
+  {name = "{{ cookiecutter.author_full_name }}", email = "{{ cookiecutter.author_email }}"},
 ]
 classifiers = [
   "Development Status :: 4 - Beta",
-  "Intended Audience :: Developers",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3.7",
   "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
-  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.9", #   "License :: OSI Approved :: {{ cookiecutter.license }}", TODO
   "Operating System :: OS Independent",
 ]
-dependencies = []
-description = "A cookiecutter for generating a basic scaffolding for python projects"
-keywords = ["cookiecutter", "python", "project", "generator"]
+dependencies = [
+  # fill me
+]
+description = "{{ cookiecutter.project_description }}"
+keywords = [
+  # fill me
+]
 license = {file = "LICENSE"}
 maintainers = [
-  {name = "Ali Hajimirza (ali92hm)", email = "ali@alihm.net"},
+  {name = "{{ cookiecutter.author_full_name }}", email = "{{ cookiecutter.author_email }}"},
 ]
-name = "cookiecutter-pyproject"
+name = "{{ cookiecutter.project_name_kebab_case }}"
 readme = "README.md"
 requires-python = ">=3.7"
 version = "0.1.0"
 
 [project.urls]
-changelog = "github.com/ali92hm/cookiecutter-pyproject/blob/master/CHANGELOG.md"
-documentation = "github.com/ali92hm/cookiecutter-pyproject/blob/master/README.md"
-homepage = "https://github.com/ali92hm/cookiecutter-pyproject"
+changelog = "{{ cookiecutter.project_repo }}/blob/master/CHANGELOG.md"
+documentation = "{{ cookiecutter.project_repo }}/blob/master/README.md"
+homepage = "{{ cookiecutter.project_repo }}"
 repository = "github.com"
+
+[project.entry-points]
+{{ cookiecutter.project_name_kebab_case }} = "{{ cookiecutter.project_name_snake_case }}.cli.entrypoint:main"
 
 [build-system]
 build-backend = "setuptools.build_meta"
@@ -46,7 +51,6 @@ multi_line_output = 3
 use_parentheses = true
 
 [tool.pytest.ini_options]
-addopts = "--basetemp=.generated --keep-baked-projects"
 testpaths = [
   "tests",
 ]
@@ -56,8 +60,6 @@ exclude = '''
 /(
 |dist
 |docs
-|.generated
-|{{cookiecutter.project_name_kebab_case}}
 )/
 '''
 target-version = ['py39']
@@ -66,7 +68,6 @@ target-version = ['py39']
 check_untyped_defs = true
 disallow_any_generics = true
 disallow_untyped_defs = true
-exclude = "{{cookiecutter.project_name_kebab_case}}/"
 follow_imports = "silent"
 ignore_missing_imports = true
 no_implicit_reexport = true

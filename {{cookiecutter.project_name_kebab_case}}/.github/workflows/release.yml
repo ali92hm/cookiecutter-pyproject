@@ -1,0 +1,29 @@
+name: release
+on:
+  workflow_run:
+    workflows:
+      - tests
+    branches: master
+    types:
+      - completed
+
+jobs:
+{%- raw %}
+  build-and-release:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Initialize project
+        run: |
+          make init
+      - name: Build package
+        run: |
+          make build
+      - name: release package
+        run: |
+          make release
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+{%- endraw %}

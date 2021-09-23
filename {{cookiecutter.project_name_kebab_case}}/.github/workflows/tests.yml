@@ -10,6 +10,7 @@ on:
       - synchronize
 
 jobs:
+{%- raw %}
   build-and-test:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
@@ -33,3 +34,4 @@ jobs:
       - name: Build package
         run: |
           make build
+{%- endraw %}
