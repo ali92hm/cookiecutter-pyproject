@@ -66,6 +66,7 @@ target-version = ['py39']
 check_untyped_defs = true
 disallow_any_generics = true
 disallow_untyped_defs = true
+exclude = "{{cookiecutter.project_name_kebab_case}}/"
 follow_imports = "silent"
 ignore_missing_imports = true
 no_implicit_reexport = true
