@@ -1,5 +1,6 @@
 import datetime
 import os
+import pytest
 import toml
 
 
@@ -17,6 +18,10 @@ def run_generated_project_assertions(generated_project, **kwargs):
     if "project_name" in kwargs:
         project_name = kwargs["project_name"]
 
+    # These vairables while can be set by the user, they are not meant to. In later
+    # versions of cookiecutter we can add __ prefix to them in order to hide them from
+    # the user. In the meantime, the pre_gen script will throw an exception if they are
+    # different than the project name
     project_name_snake_case = project_name.lower().replace(" ", "_").replace("-", "_")
     project_name_kebab_case = project_name.lower().replace(" ", "-").replace("_", "-")
 
@@ -139,40 +144,116 @@ def run_generated_project_assertions(generated_project, **kwargs):
     with open(os.path.join(project_path, "LICENSE"), "r") as license_file:
         license_content = license_file.read()
         # first line must be the license name
-        assert license_content.split(os.linesep)[0].strip() == license
+        assert license_content.split(os.linesep)[0].strip().lower() == license.lower()
         # Make sure the correct year is added to the license file
-        assert str(datetime.datetime.now().year) in license_content
-        assert author_full_name in license_content
+        if license != "Not open source" and license != "Unlicense":
+            assert str(datetime.datetime.now().year) in license_content
+            assert author_full_name in license_content
 
 
-def test_bake_project_with_defaults(cookies):
+def test_bake_project_with_defaults_should_succeed(cookies):
     generated_project = cookies.bake()
     run_generated_project_assertions(generated_project)
 
 
-def test_bake_project_with_custom_raw_name(cookies):
-    project_name = "some Kool_proJect"
+def test_bake_project_with_custom_project_name_should_succeed(cookies):
+    project_name = "s0me Kool2_proJect"
     generated_project = cookies.bake(extra_context={"project_name": project_name})
     run_generated_project_assertions(
         generated_project,
         project_name=project_name,
-        project_repo="https://github.com/janeDoe/some-kool-project",
+        project_repo="https://github.com/janeDoe/s0me-kool2-project",
     )
 
 
-# def test_bake_project_with_custom_snake_case_name(cookies):
-#     project_name_input = "my project"
-#     project_snake_case = "my_project_2"
-#     generated_project = cookies.bake(
-#         extra_context={
-#             "project_name": project_name_input,
-#             "project_name_snake_case": project_snake_case,
-#         }
-#     )
-#     run_generated_project_assertions(
-#         generated_project,
-#         project_name_input=project_name_input,
-#         project_name="my-project",
-#         project_name_snake_case=project_snake_case,
-#         project_repo="https://github.com/janeDoe/my-project",
-#     )
+@pytest.mark.parametrize(
+    "project_name",
+    ["my&project", "$$project", "[sdf]23", "1234", "1sdf", "cool^project"],
+)
+def test_bake_with_not_valid_project_name_should_fail(project_name, cookies):
+    generated_project = cookies.bake(
+        extra_context={
+            "project_name": project_name,
+        }
+    )
+
+    assert generated_project.exception is not None
+    assert generated_project.exit_code == -1
+
+
+# TODO: Delete this after migration to cookiecutter 2.0
+def test_bake_project_with_custom_snake_case_name_should_fail(cookies):
+    generated_project = cookies.bake(
+        extra_context={
+            "project_name": "my project",
+            "project_name_snake_case": "my_project_2",
+        }
+    )
+
+    assert generated_project.exception is not None
+    assert generated_project.exit_code == -1
+
+
+# TODO: Delete this after migration to cookiecutter 2.0
+def test_bake_project_with_custom_kebab_case_name_should_fail(cookies):
+    generated_project = cookies.bake(
+        extra_context={
+            "project_name": "my project",
+            "project_name_kebab_case": "my-cool-project",
+        }
+    )
+
+    assert generated_project.exception is not None
+    assert generated_project.exit_code == -1
+
+
+def test_bake_with_custom_metadata_should_succeed(cookies):
+    input_data = {
+        "project_name": "advanced calculator",
+        "project_description": "This calculator can be used in a rocket ship",
+        "author_full_name": "Bruce wayne",
+        "author_email": "bruce@wayneenterprises.com",
+        "github_organization": "theDarkKight",
+        "project_repo": "https://onprem.com/wayneenterprises/bruce-advance-calc",
+    }
+
+    generated_project = cookies.bake(extra_context=input_data)
+
+    run_generated_project_assertions(generated_project, **input_data)
+
+
+def test_bake_with_auto_generated_project_repo_should_succeed(cookies):
+    project_name = "Mission controller"
+    github_organization = "nasa"
+    generated_project = cookies.bake(
+        extra_context={
+            "project_name": project_name,
+            "github_organization": github_organization,
+        }
+    )
+
+    run_generated_project_assertions(
+        generated_project,
+        project_name=project_name,
+        github_organization=github_organization,
+        project_repo="https://github.com/nasa/mission-controller",
+    )
+
+
+@pytest.mark.parametrize(
+    "license",
+    [
+        "MIT License",
+        "BSD 2-Clause License",
+        "BSD 3-Clause License",
+        "ISC License",
+        "Apache License Version 2.0",
+        "GNU General Public License Version 3",
+        "Unlicense",
+        "Not open source",
+    ],
+)
+def test_bake_with_different_licesens_should_succeed(license, cookies):
+    generated_project = cookies.bake(extra_context={"license": license})
+
+    run_generated_project_assertions(generated_project, license=license)
