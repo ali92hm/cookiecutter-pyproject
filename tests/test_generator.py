@@ -144,7 +144,7 @@ def run_generated_project_assertions(generated_project, **kwargs):
     with open(os.path.join(project_path, "LICENSE"), "r") as license_file:
         license_content = license_file.read()
         # first line must be the license name
-        assert license_content.split(os.linesep)[0].strip().lower() == license.lower()
+        assert license_content.splitlines()[0].strip().lower() == license.lower()
         # Make sure the correct year is added to the license file
         if license != "Not open source" and license != "Unlicense":
             assert str(datetime.datetime.now().year) in license_content
