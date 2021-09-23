@@ -9,10 +9,12 @@
     "project_repo": "https://github.com/{{ cookiecutter.github_organization }}/{{ cookiecutter.project_name_kebab_case }}",
     "license": [
         "MIT License",
-        "BSD License",
+        "BSD 2-Clause License",
+        "BSD 3-Clause License",
         "ISC License",
-        "Apache Software License 2.0",
-        "GNU General Public License v3",
+        "Apache License Version 2.0",
+        "GNU General Public License Version 3",
+        "Unlicense",
         "Not open source"
     ]
 }
