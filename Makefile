@@ -5,17 +5,7 @@ init:
 	pip install -r requirements_dev.txt
 
 clean:
-	rm -rf .generated
-	rm -rf .mypy_cache
-	rm -rf .pytest_cache
-	rm -fr dist/
-	rm -fr build/
-	rm -rf *.egg-info/
-	rm -rf *.egg
-	find . -name '*.pyc' -exec rm -f {} +
-	find . -name '*.pyo' -exec rm -f {} +
-	find . -name '*~' -exec rm -f {} +
-	find . -name '__pycache__' -exec rm -fr {} +
+	./scripts/clean.sh
 
 check-style:
 	flake8 .
@@ -26,8 +16,16 @@ fix-style:
 check-types:
 	mypy .
 
-test:
-	pytest
+test-unit:
+	./scripts/test-unit.sh
+
+test-integration:
+	./scripts/test-integration.sh
+
+test-e2e:
+	./scripts/test-e2e.sh
+
+test: test-unit test-integration test-e2e
 
 build: clean
 	python setup.py sdist bdist_wheel --universal
