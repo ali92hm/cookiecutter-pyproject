@@ -1,29 +1,36 @@
 import datetime
 import os
+import json
+from pathlib import Path
 import pytest
 import toml
+
+from hooks import pre_gen_project
+
+
+def get_cookiecutter_defaults():
+    root = Path(__file__).resolve().parent.parent.parent
+    with open(os.path.join(root, "cookiecutter.json"), "r") as cookie_cutter_file:
+        return json.load(cookie_cutter_file)
 
 
 def run_generated_project_assertions(generated_project, **kwargs):
     # These are the default values if no kwargs are given
-    project_name = "Sample project"
-    project_description = "Generated sample project from cookiecutter-pyproject"
-    author_full_name = "Jane Doe"
-    author_email = "jane.doe@example.com"
-    github_organization = "janeDoe"
-    project_repo = "https://github.com/janeDoe/sample-project"
-    license = "MIT License"
+    cookie_cutter_file = get_cookiecutter_defaults()
+    project_name = cookie_cutter_file["project_name"]
+    project_description = cookie_cutter_file["project_description"]
+    author_full_name = cookie_cutter_file["author_full_name"]
+    author_email = cookie_cutter_file["author_email"]
+    github_organization = cookie_cutter_file["github_organization"]
+    project_repo = f"https://github.com/{github_organization}/{pre_gen_project.get_project_name_kebab_case(project_name)}"
+    license = cookie_cutter_file["license"][0]
 
     # Replace these variables if an override is given
     if "project_name" in kwargs:
         project_name = kwargs["project_name"]
 
-    # These vairables while can be set by the user, they are not meant to. In later
-    # versions of cookiecutter we can add __ prefix to them in order to hide them from
-    # the user. In the meantime, the pre_gen script will throw an exception if they are
-    # different than the project name
-    project_name_snake_case = project_name.lower().replace(" ", "_").replace("-", "_")
-    project_name_kebab_case = project_name.lower().replace(" ", "-").replace("_", "-")
+    project_name_snake_case = pre_gen_project.get_project_name_snake_case(project_name)
+    project_name_kebab_case = pre_gen_project.get_project_name_kebab_case(project_name)
 
     if "project_description" in kwargs:
         project_description = kwargs["project_description"]
@@ -97,9 +104,20 @@ def run_generated_project_assertions(generated_project, **kwargs):
     assert f"{project_name_snake_case}.py" in src_files
 
     # Check files in test folder
-    test_files = os.listdir(os.path.join(project_path, "tests"))
-    assert "__init__.py" in test_files
-    assert f"test_{project_name_snake_case}.py" in test_files
+    top_level_test_files = os.listdir(os.path.join(project_path, "tests"))
+    assert "__init__.py" in top_level_test_files
+    assert "unit" in top_level_test_files
+    assert "integration" in top_level_test_files
+
+    unit_test_files = os.listdir(os.path.join(project_path, "tests", "unit"))
+    assert "__init__.py" in unit_test_files
+    assert f"test_{project_name_snake_case}.py" in unit_test_files
+
+    integration_test_files = os.listdir(
+        os.path.join(project_path, "tests", "integration")
+    )
+    assert "__init__.py" in integration_test_files
+    assert f"test_{project_name_snake_case}.py" in integration_test_files
 
     # Check readme
     with open(os.path.join(project_path, "README.md"), "r") as readme_file:
@@ -240,19 +258,7 @@ def test_bake_with_auto_generated_project_repo_should_succeed(cookies):
     )
 
 
-@pytest.mark.parametrize(
-    "license",
-    [
-        "MIT License",
-        "BSD 2-Clause License",
-        "BSD 3-Clause License",
-        "ISC License",
-        "Apache License Version 2.0",
-        "GNU General Public License Version 3",
-        "Unlicense",
-        "Not open source",
-    ],
-)
+@pytest.mark.parametrize("license", get_cookiecutter_defaults()["license"])
 def test_bake_with_different_licesens_should_succeed(license, cookies):
     generated_project = cookies.bake(extra_context={"license": license})
 

@@ -130,3 +130,6 @@ dmypy.json
 
 # OS specific
 .DS_Store
+
+# Project specific
+.reports
