@@ -151,7 +151,28 @@ def run_generated_project_assertions(generated_project, **kwargs):
         )
 
         assert project_metadata["project"]["license"]["file"] == "LICENSE"
-        # TODO check for OSI license in project_metadata["project"]["classifiers"]
+
+        # TODO: Move this map as a private variable to cookiecutter.json when this
+        # https://github.com/cookiecutter/cookiecutter/issues/1582 is resolved
+        pypi_license_map = {
+            "MIT License": "License :: OSI Approved :: MIT License",
+            "BSD 2-Clause License": "License :: OSI Approved :: BSD License",
+            "BSD 3-Clause License": "License :: OSI Approved :: BSD License",
+            "ISC License": "License :: OSI Approved :: ISC License (ISCL)",
+            "Apache License Version 2.0": "License :: OSI Approved :: Apache Software License",
+            "GNU General Public License Version 3": "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+            "Unlicense": "License :: OSI Approved :: The Unlicense (Unlicense)",
+            "Not open source": "",
+        }
+
+        if license != "Not open source":
+            assert (
+                pypi_license_map[license] in project_metadata["project"]["classifiers"]
+            )
+        else:
+            for _, value in pypi_license_map.items():
+                # None of these items should be in the array
+                assert value not in project_metadata["project"]["classifiers"]
 
         assert project_name_kebab_case in project_metadata["project"]["entry-points"]
         assert (
