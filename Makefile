@@ -8,10 +8,10 @@ clean:
 	./scripts/clean.sh
 
 check-style:
-	flake8 .
+	./scripts/check-style.sh
 
 fix-style:
-	black .
+	./scripts/fix-style.sh
 
 check-types:
 	mypy .
