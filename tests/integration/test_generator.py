@@ -104,9 +104,20 @@ def run_generated_project_assertions(generated_project, **kwargs):
     assert f"{project_name_snake_case}.py" in src_files
 
     # Check files in test folder
-    test_files = os.listdir(os.path.join(project_path, "tests"))
-    assert "__init__.py" in test_files
-    assert f"test_{project_name_snake_case}.py" in test_files
+    top_level_test_files = os.listdir(os.path.join(project_path, "tests"))
+    assert "__init__.py" in top_level_test_files
+    assert "unit" in top_level_test_files
+    assert "integration" in top_level_test_files
+
+    unit_test_files = os.listdir(os.path.join(project_path, "tests", "unit"))
+    assert "__init__.py" in unit_test_files
+    assert f"test_{project_name_snake_case}.py" in unit_test_files
+
+    integration_test_files = os.listdir(
+        os.path.join(project_path, "tests", "integration")
+    )
+    assert "__init__.py" in integration_test_files
+    assert f"test_{project_name_snake_case}.py" in integration_test_files
 
     # Check readme
     with open(os.path.join(project_path, "README.md"), "r") as readme_file:
