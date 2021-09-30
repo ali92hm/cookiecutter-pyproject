@@ -30,9 +30,6 @@ test: test-unit test-integration test-e2e
 build: clean
 	python setup.py sdist bdist_wheel --universal
 
-release:
-	twine upload dist/*
-
 ci: check-style check-types test
 
 link:
