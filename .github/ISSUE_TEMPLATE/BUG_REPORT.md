@@ -33,11 +33,12 @@ Please describe how this bug can be reproduce
 
 <!--
 Python version: output of `python -V`
-Python implementation:
+Python implementation: `python -c "print(__import__('platform').python_implementation())"`
 Package version: What version of this project are you using
 Platform: output of `uname -a` (UNIX), or version and 32 or 64-bit (Windows)
 -->
 
 -   **Python version**:
+-   **Python implementation**:
 -   **Package version**:
 -   **Platform**:
