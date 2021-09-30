@@ -7,8 +7,6 @@ Bug fixes and new features should include tests and documentation.
 Contributors guide: ./CONTRIBUTING.md
 -->
 
-<!-- _Please make sure to review and check all of these items:_ -->
-
 ### What are you changing?
 
 <!-- Please provide a description of the change here. -->
@@ -21,7 +19,7 @@ Contributors guide: ./CONTRIBUTING.md
 
 <!-- Please provide affected core subsystem(s). -->
 
-##### Checklist
+#### Checklist
 
 <!-- Remove items that do not apply. For completed items, change [ ] to [x]. -->
 
