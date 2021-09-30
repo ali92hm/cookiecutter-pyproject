@@ -21,7 +21,7 @@ A [cookiecutter] for generating a ~semi-opinionated~ scaffolding for python proj
 
 ### System requirements
 
--   [python] >= 3.6 (comes with pip)
+-   [python] >= 3.7 (comes with pip)
 -   [cookiecutter] >= 1.7.3
 
 ### Generating your first project
