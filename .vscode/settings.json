@@ -1,5 +1,22 @@
 {
+    // Editor
+    "editor.rulers": [
+        88,
+        120
+    ],
     "editor.formatOnSave": true,
+    // Files
+    "files.exclude": {
+        "**/__pycache__": true,
+        ".mypy_cache": true,
+        ".pytest_cache": true,
+    },
+    "files.watcherExclude": {
+        "**/__pycache__": true,
+        ".mypy_cache": true,
+        ".pytest_cache": true,
+    },
+    // Python settings
     "python.testing.pytestArgs": [
         "tests"
     ],

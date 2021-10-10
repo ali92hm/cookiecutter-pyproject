@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "EditorConfig.EditorConfig",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "be5invis.toml",
+        "DavidAnson.vscode-markdownlint"
+    ]
+}
