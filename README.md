@@ -2,7 +2,7 @@
 
 ![CI Tests] ![black badge]
 
-A [cookiecutter] for generating a ~semi-opinionated~ scaffolding for python projects as well as python packages.
+A [cookiecutter] for generating a _semi-opinionated_ scaffolding for python projects as well as python packages.
 
 ## Features
 
@@ -16,6 +16,8 @@ A [cookiecutter] for generating a ~semi-opinionated~ scaffolding for python proj
 -   Using the `pyproject.toml` for most tool configuration,
     project metadata according to [pep 621], and minimum build system requirements according to [pep 518]
 -   More goodies coming soon
+
+You can read more about these choices under [Tool choices and design considerations]
 
 ## Getting started
 
