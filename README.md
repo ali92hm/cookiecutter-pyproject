@@ -2,7 +2,7 @@
 
 ![CI Tests] ![black badge]
 
-A [cookiecutter] for generating a ~semi-opinionated~ scaffolding for python projects as well as python packages.
+A [cookiecutter] for generating a _semi-opinionated_ scaffolding for python projects as well as python packages.
 
 ## Features
 
@@ -17,9 +17,11 @@ A [cookiecutter] for generating a ~semi-opinionated~ scaffolding for python proj
     project metadata according to [pep 621], and minimum build system requirements according to [pep 518]
 -   More goodies coming soon
 
+You can read more about these choices under [Tool choices and design considerations]
+
 ## Getting started
 
-### System requirements
+### System requirement
 
 -   [python] >= 3.7 (comes with pip)
 -   [cookiecutter] >= 1.7.3
@@ -28,7 +30,7 @@ A [cookiecutter] for generating a ~semi-opinionated~ scaffolding for python proj
 
 In order to generate your first project run:
 
-```
+```bash
 cookiecutter https://github.com/ali92hm/cookiecutter-pyproject
 ```
 

@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "esbenp.prettier-vscode",
+        "EditorConfig.EditorConfig",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "be5invis.toml"
+    ]
+}
