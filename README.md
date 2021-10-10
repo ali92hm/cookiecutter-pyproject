@@ -2,35 +2,35 @@
 
 ![CI Tests] ![black badge]
 
-A [cookiecutter] for generating a _semi-opinionated_ scaffolding for python projects as well as python packages.
+A [cookiecutter] for generating a *semi-opinionated* scaffolding for python projects as well as python packages.
 
 ## Features
 
--   Complete structure for a python project
--   Ready for publishing to [PyPI]
--   Full Github integration (github actions, issue template, pr templates etc)
--   Code linter using [flake8], [isort], and [black]
--   Code formatting using [isort] and [black]
--   [Pytest] integration for testing
--   Type checking using [mypy]
--   Using the `pyproject.toml` for most tool configuration,
+- Complete structure for a python project
+- Ready for publishing to [PyPI]
+- Full Github integration (github actions, issue template, pr templates etc)
+- Code linter using [flake8], [isort], and [black]
+- Code formatting using [isort] and [black]
+- [Pytest] integration for testing
+- Type checking using [mypy]
+- Using the `pyproject.toml` for most tool configuration,
     project metadata according to [pep 621], and minimum build system requirements according to [pep 518]
--   More goodies coming soon
+- More goodies coming soon
 
 You can read more about these choices under [Tool choices and design considerations]
 
 ## Getting started
 
-### System requirements
+### System requirement
 
--   [python] >= 3.7 (comes with pip)
--   [cookiecutter] >= 1.7.3
+- [python] >= 3.7 (comes with pip)
+- [cookiecutter] >= 1.7.3
 
 ### Generating your first project
 
 In order to generate your first project run:
 
-```
+```bash
 cookiecutter https://github.com/ali92hm/cookiecutter-pyproject
 ```
 
@@ -61,9 +61,9 @@ Choose from 1, 2, 3, 4, 5, 6, 7 8 [1]: Pick the license you want to use
 
 ## Resources and documentation
 
--   [Development instructions]
--   [Tool choices and design considerations]
--   [Project structure]
+- [Development instructions]
+- [Tool choices and design considerations]
+- [Project structure]
 
 ## Issues or questions
 
