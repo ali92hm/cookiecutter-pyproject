@@ -69,7 +69,6 @@ disallow_untyped_defs = true
 exclude = "{{cookiecutter.project_name_kebab_case}}/"
 follow_imports = "silent"
 ignore_missing_imports = true
-no_implicit_reexport = true
 strict_optional = true
 warn_redundant_casts = true
 warn_unused_ignores = true
