@@ -13,8 +13,14 @@ with open("./pyproject.toml") as pyproj_file:
 with open(project_metadata["project"]["readme"]) as readme_file:
     readme_content = readme_file.read()
 
-with open(project_metadata["project"]["license"]["file"]) as license_file:
-    license = license_file.readline().strip()
+license = ""
+license_files: list[str] = []
+
+if "license" in project_metadata["project"]:
+    license_files = [project_metadata["project"]["license"]["file"]]
+
+    with open(project_metadata["project"]["license"]["file"]) as license_file:
+        license = license_file.readline().strip()
 
 src_folder = project_metadata["project"]["name"].replace("-", "_")
 packages = setuptools.find_packages(include=[src_folder, f"{src_folder}.*"])
@@ -42,7 +48,7 @@ setup_args = dict(
     packages=packages,
     classifiers=project_metadata["project"]["classifiers"],
     license=license,
-    license_files=[project_metadata["project"]["license"]["file"]],
+    license_files=license_files,
     python_requires=project_metadata["project"]["requires-python"],
     keywords=project_metadata["project"]["keywords"],
     install_requires=project_metadata["project"]["dependencies"],
