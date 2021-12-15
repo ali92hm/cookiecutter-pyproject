@@ -14,7 +14,7 @@ with open(project_metadata["project"]["readme"]) as readme_file:
     readme_content = readme_file.read()
 
 license = ""
-license_files: list[str] = []
+license_files = []
 
 if "license" in project_metadata["project"]:
     license_files = [project_metadata["project"]["license"]["file"]]
