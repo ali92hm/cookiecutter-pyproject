@@ -13,3 +13,8 @@ def install_dep_and_run_ci(generated_project):
 def test_e2e_defaults(cookies):
     generated_project = cookies.bake()
     install_dep_and_run_ci(generated_project)
+
+
+def test_e2e_no_license(cookies):
+    generated_project = cookies.bake(extra_context={"license": "Not open source"})
+    install_dep_and_run_ci(generated_project)

@@ -80,7 +80,10 @@ def run_generated_project_assertions(generated_project, **kwargs):
     toplevel_files = os.listdir(project_path)
 
     assert ".flake8" in toplevel_files
-    assert "LICENSE" in toplevel_files
+    if license != "Not open source":
+        assert "LICENSE" in toplevel_files
+    else:
+        assert "LICENSE" not in toplevel_files
     assert "requirements.txt" in toplevel_files
     assert "CHANGELOG.md" in toplevel_files
     assert "Makefile" in toplevel_files
@@ -150,7 +153,10 @@ def run_generated_project_assertions(generated_project, **kwargs):
             == f"{project_repo}/blob/master/README.md"
         )
 
-        assert project_metadata["project"]["license"]["file"] == "LICENSE"
+        if license == "Not open source":
+            assert "license" not in project_metadata["project"]
+        else:
+            assert project_metadata["project"]["license"]["file"] == "LICENSE"
 
         # TODO: Move this map as a private variable to cookiecutter.json when this
         # https://github.com/cookiecutter/cookiecutter/issues/1582 is resolved
@@ -181,14 +187,15 @@ def run_generated_project_assertions(generated_project, **kwargs):
         )
 
     # License file assertions
-    with open(os.path.join(project_path, "LICENSE"), "r") as license_file:
-        license_content = license_file.read()
-        # first line must be the license name
-        assert license_content.splitlines()[0].strip().lower() == license.lower()
-        # Make sure the correct year is added to the license file
-        if license != "Not open source" and license != "Unlicense":
-            assert str(datetime.datetime.now().year) in license_content
-            assert author_full_name in license_content
+    if license != "Not open source":
+        with open(os.path.join(project_path, "LICENSE"), "r") as license_file:
+            license_content = license_file.read()
+            # first line must be the license name
+            assert license_content.splitlines()[0].strip().lower() == license.lower()
+            # Make sure the correct year is added to the license file
+            if license != "Unlicense":
+                assert str(datetime.datetime.now().year) in license_content
+                assert author_full_name in license_content
 
 
 def test_bake_project_with_defaults_should_succeed(cookies):
