@@ -54,9 +54,9 @@ chat rooms, and mailing lists is expected to follow the [CODE_OF_CONDUCT]
 [file an issue]: {{ cookiecutter.project_repo }}/issues
 [contributing]: ./CONTRIBUTING.md
 [code_of_conduct]: ./CODE_OF_CONDUCT.md
-[development instructions]: ./docs/development-instructions
-[first time setup]: ./docs/first-time-setup
-[project structure]: ./docs/project-structure
+[development instructions]: ./docs/development-instructions.md
+[first time setup]: ./docs/first-time-setup.md
+[project structure]: ./docs/project-structure.md
 [mit license]: http://opensource.org/licenses/MIT
 [bsd 2-clause license]: https://opensource.org/licenses/BSD-2-Clause
 [bsd 3-clause license]: https://opensource.org/licenses/BSD-3-Clause
