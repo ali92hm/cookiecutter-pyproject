@@ -45,7 +45,7 @@ chat rooms, and mailing lists is expected to follow the [CODE_OF_CONDUCT]
 
 [{{ cookiecutter.license }}]
 
-[![OSI certified][osi_certified]][{{ cookiecutter.license }}]
+[![osi certified][osi_certified]][{{ cookiecutter.license }}]
 
 {%- endif %}
 
@@ -57,12 +57,12 @@ chat rooms, and mailing lists is expected to follow the [CODE_OF_CONDUCT]
 [development instructions]: ./docs/development-instructions
 [first time setup]: ./docs/first-time-setup
 [project structure]: ./docs/project-structure
-[MIT License]: http://opensource.org/licenses/MIT
-[BSD 2-Clause License]: https://opensource.org/licenses/BSD-2-Clause
-[BSD 3-Clause License]: https://opensource.org/licenses/BSD-3-Clause
-[ISC License]: https://opensource.org/licenses/ISC
-[Apache License Version 2.0]: https://opensource.org/licenses/Apache-2.0
-[GNU General Public License Version 3]: https://opensource.org/licenses/GPL-3.0
-[Unlicense]: https://opensource.org/licenses/unlicense
+[mit license]: http://opensource.org/licenses/MIT
+[bsd 2-clause license]: https://opensource.org/licenses/BSD-2-Clause
+[bsd 3-clause license]: https://opensource.org/licenses/BSD-3-Clause
+[isc license]: https://opensource.org/licenses/ISC
+[apache license version 2.0]: https://opensource.org/licenses/Apache-2.0
+[gnu general public license version 3]: https://opensource.org/licenses/GPL-3.0
+[unlicense]: https://opensource.org/licenses/unlicense
 [osi_certified]: https://opensource.org/trademarks/osi-certified/web/osi-certified-120x100.png
 [python]: https://www.python.org/downloads/
