@@ -31,6 +31,3 @@ build: clean
 	python setup.py sdist bdist_wheel --universal
 
 ci: check-style check-types test
-
-link:
-	pip install -e .
