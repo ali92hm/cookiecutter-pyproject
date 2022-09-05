@@ -8,3 +8,4 @@ pytest-cookies==0.6.1
 pytest-cov==3.0.0
 toml==0.10.2
 types-toml==0.10.0
+build==0.8.0
