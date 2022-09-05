@@ -1,8 +1,8 @@
 import datetime
 import json
 import os
-from pathlib import Path
 import platform
+from pathlib import Path
 
 import pytest
 import toml
