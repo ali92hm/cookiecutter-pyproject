@@ -25,7 +25,7 @@ test-integration:
 test: test-unit test-integration
 
 build: clean
-	python setup.py sdist bdist_wheel --universal
+	python -m build
 
 release:
 	twine upload dist/*
@@ -33,4 +33,4 @@ release:
 ci: check-style check-types test
 
 link:
-	pip install -e .
+	pip install --editable .

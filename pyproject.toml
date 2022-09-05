@@ -30,15 +30,19 @@ version = "0.1.0"
 changelog = "github.com/ali92hm/cookiecutter-pyproject/blob/master/CHANGELOG.md"
 documentation = "github.com/ali92hm/cookiecutter-pyproject/blob/master/README.md"
 homepage = "https://github.com/ali92hm/cookiecutter-pyproject"
-repository = "github.com"
+repository = "https://github.com/ali92hm/cookiecutter-pyproject"
 
 [build-system]
 build-backend = "setuptools.build_meta"
 requires = [
-  "setuptools>=57",
-  "toml>=0.10",
-  "wheel>=0.36",
+  "setuptools>=65",
+  "wheel>=0.37",
 ]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["*"]
+exclude = []
 
 [tool.isort]
 multi_line_output = 3

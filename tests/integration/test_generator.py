@@ -92,7 +92,6 @@ def run_generated_project_assertions(generated_project, **kwargs):
     assert "docs" in toplevel_files
     assert ".editorconfig" in toplevel_files
     assert "README.md" in toplevel_files
-    assert "setup.py" in toplevel_files
     assert ".gitignore" in toplevel_files
     assert "scripts" in toplevel_files
     assert ".github" in toplevel_files
@@ -180,9 +179,9 @@ def run_generated_project_assertions(generated_project, **kwargs):
                 # None of these items should be in the array
                 assert value not in project_metadata["project"]["classifiers"]
 
-        assert project_name_kebab_case in project_metadata["project"]["entry-points"]
+        assert project_name_kebab_case in project_metadata["project"]["scripts"]
         assert (
-            project_metadata["project"]["entry-points"][project_name_kebab_case]
+            project_metadata["project"]["scripts"][project_name_kebab_case]
             == f"{project_name_snake_case}.cli.entrypoint:main"
         )
 
