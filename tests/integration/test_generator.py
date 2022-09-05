@@ -1,7 +1,6 @@
 import datetime
 import json
 import os
-import platform
 from pathlib import Path
 
 import pytest
@@ -68,12 +67,6 @@ def run_generated_project_assertions(generated_project, **kwargs):
     assert generated_project.context["license"] == license
     # This is so when new variables are added/removed we know to add tests for them :)
     assert len(generated_project.context) == 9
-
-    # The following issue on pytest-cookies is preventing the rest of these assertions
-    # to pass on windows. Until then we want to skip the rest of these assertions
-    # https://github.com/hackebrot/pytest-cookies/issues/62
-    if platform.system() == "Windows":
-        return
 
     # make sure the project was generated correctly
     assert generated_project.exit_code == 0
