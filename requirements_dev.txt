@@ -6,3 +6,5 @@ mypy==0.942
 pytest==6.2.5
 pytest-cookies==0.6.1
 pytest-cov==3.0.0
+toml==0.10.2
+types-toml==0.10.0
