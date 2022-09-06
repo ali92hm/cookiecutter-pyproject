@@ -31,3 +31,6 @@ build: clean
 	python -m build
 
 ci: check-style check-types test
+
+generate:
+	./scripts/generate.sh

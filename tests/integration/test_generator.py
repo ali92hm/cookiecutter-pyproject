@@ -57,10 +57,12 @@ def run_generated_project_assertions(generated_project, **kwargs):
     # Make sure correct context was passed to cookiecutter
     assert generated_project.context["project_name"] == project_name
     assert (
-        generated_project.context["project_name_snake_case"] == project_name_snake_case
+        generated_project.context["__project_name_snake_case"]
+        == project_name_snake_case
     )
     assert (
-        generated_project.context["project_name_kebab_case"] == project_name_kebab_case
+        generated_project.context["__project_name_kebab_case"]
+        == project_name_kebab_case
     )
     assert generated_project.context["project_description"] == project_description
     assert generated_project.context["author_full_name"] == author_full_name
@@ -223,32 +225,6 @@ def test_bake_with_not_valid_project_name_should_fail(project_name, cookies):
     generated_project = cookies.bake(
         extra_context={
             "project_name": project_name,
-        }
-    )
-
-    assert generated_project.exception is not None
-    assert generated_project.exit_code == -1
-
-
-# TODO: Delete this after migration to cookiecutter 2.0
-def test_bake_project_with_custom_snake_case_name_should_fail(cookies):
-    generated_project = cookies.bake(
-        extra_context={
-            "project_name": "my project",
-            "project_name_snake_case": "my_project_2",
-        }
-    )
-
-    assert generated_project.exception is not None
-    assert generated_project.exit_code == -1
-
-
-# TODO: Delete this after migration to cookiecutter 2.0
-def test_bake_project_with_custom_kebab_case_name_should_fail(cookies):
-    generated_project = cookies.bake(
-        extra_context={
-            "project_name": "my project",
-            "project_name_kebab_case": "my-cool-project",
         }
     )
 

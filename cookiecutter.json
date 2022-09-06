@@ -1,12 +1,12 @@
 {
     "project_name": "Sample project",
-    "project_name_snake_case": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
-    "project_name_kebab_case": "{{ cookiecutter.project_name.lower().replace(' ', '-').replace('_', '-') }}",
+    "__project_name_snake_case": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
+    "__project_name_kebab_case": "{{ cookiecutter.project_name.lower().replace(' ', '-').replace('_', '-') }}",
     "project_description": "Generated sample project from cookiecutter-pyproject",
     "author_full_name": "Jane Doe",
     "author_email": "jane.doe@example.com",
     "github_organization": "janeDoe",
-    "project_repo": "https://github.com/{{ cookiecutter.github_organization }}/{{ cookiecutter.project_name_kebab_case }}",
+    "project_repo": "https://github.com/{{ cookiecutter.github_organization }}/{{ cookiecutter.__project_name_kebab_case }}",
     "license": [
         "MIT License",
         "BSD 2-Clause License",

@@ -25,7 +25,7 @@ cookiecutter-pyproject
 │ ├── extensions.json - Suggested VSCode extensions for this project
 │ └── settings.json - VSCode settings for the project
 ├── cookiecutter.json - Defines the cookiecutter variables for this template
-├── {{cookiecutter.project_name_snake_case}} - The folder containing the templated project that will be rendered on execution
+├── {{cookiecutter.__project_name_snake_case}} - The folder containing the templated project that will be rendered on execution
 ├── hooks - Cookiecutter hooks
 │ ├── pre_gen_project.py - The script that runs before the project artifact generation
 │ └── post_gen_project.py - The script that runs after the project artifact generation

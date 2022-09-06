@@ -40,8 +40,6 @@ Please ignore `project_name_snake_case` and `project_name_kebab_case` variables 
 
 ```no-highlight
 project_name [Sample project]: The name for your project (Please don't use special characters, space is file)
-project_name_snake_case []: Just press enter
-project_name_kebab_case []: Just press enter
 project_description [Generated sample project from cookiecutter-pyproject]: Short description of your project
 author_full_name [Jane Doe]: Your full name
 author_email [jane.doe@example.com]: Your email address
