@@ -36,8 +36,6 @@ cookiecutter https://github.com/ali92hm/cookiecutter-pyproject
 
 Cookiecutter will prompt you for the following inputs:
 
-Please ignore `project_name_snake_case` and `project_name_kebab_case` variables and leave them as default. These variable will be removed once cookiecutter supports private templated variables
-
 ```no-highlight
 project_name [Sample project]: The name for your project (Please don't use special characters, space is file)
 project_description [Generated sample project from cookiecutter-pyproject]: Short description of your project
