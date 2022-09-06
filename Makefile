@@ -2,7 +2,7 @@
 .DEFAULT_GOAL:= init
 
 init:
-	pip install -r requirements_dev.txt
+	pip install -r requirements.txt
 
 clean:
 	./scripts/clean.sh

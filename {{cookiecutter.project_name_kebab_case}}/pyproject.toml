@@ -74,7 +74,7 @@ exclude = []
 [tool.isort]
 multi_line_output = 3
 profile = "black"
-skip = ""
+skip = []
 
 [tool.pytest.ini_options]
 testpaths = [

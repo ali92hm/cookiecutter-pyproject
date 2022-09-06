@@ -47,7 +47,7 @@ exclude = []
 [tool.isort]
 multi_line_output = 3
 profile = "black"
-skip = "{{cookiecutter.project_name_kebab_case}}"
+skip = [".generated", "{{cookiecutter.project_name_kebab_case}}"]
 
 [tool.pytest.ini_options]
 addopts = "--basetemp=.generated --keep-baked-projects"
