@@ -23,7 +23,10 @@ def run_generated_project_assertions(generated_project, **kwargs):
     author_full_name = cookie_cutter_file["author_full_name"]
     author_email = cookie_cutter_file["author_email"]
     github_organization = cookie_cutter_file["github_organization"]
-    project_repo = f"https://github.com/{github_organization}/{pre_gen_project.get_project_name_kebab_case(project_name)}"
+    project_repo = (
+        f"https://github.com/{github_organization}/"
+        + f"{pre_gen_project.get_project_name_kebab_case(project_name)}"
+    )
     license = cookie_cutter_file["license"][0]
 
     # Replace these variables if an override is given
