@@ -16,5 +16,14 @@
         "GNU General Public License Version 3",
         "Unlicense",
         "Not open source"
-    ]
+    ],
+    "_pypi_license_map": {
+        "MIT License": "License :: OSI Approved :: MIT License",
+        "BSD 2-Clause License": "License :: OSI Approved :: BSD License",
+        "BSD 3-Clause License": "License :: OSI Approved :: BSD License",
+        "ISC License": "License :: OSI Approved :: ISC License (ISCL)",
+        "Apache License Version 2.0": "License :: OSI Approved :: Apache Software License",
+        "GNU General Public License Version 3": "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "Unlicense": "License :: OSI Approved :: The Unlicense (Unlicense)"
+    }
 }

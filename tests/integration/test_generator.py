@@ -28,6 +28,7 @@ def run_generated_project_assertions(generated_project, **kwargs):
         + f"{pre_gen_project.get_project_name_kebab_case(project_name)}"
     )
     license = cookie_cutter_file["license"][0]
+    pypi_license_map = cookie_cutter_file["_pypi_license_map"]
 
     # Replace these variables if an override is given
     if "project_name" in kwargs:
@@ -71,7 +72,7 @@ def run_generated_project_assertions(generated_project, **kwargs):
     assert generated_project.context["project_repo"] == project_repo
     assert generated_project.context["license"] == license
     # This is so when new variables are added/removed we know to add tests for them :)
-    assert len(generated_project.context) == 9
+    assert len(generated_project.context) == 10
 
     # make sure the project was generated correctly
     assert generated_project.exit_code == 0
@@ -162,18 +163,7 @@ def run_generated_project_assertions(generated_project, **kwargs):
         else:
             assert project_metadata["project"]["license"]["file"] == "LICENSE"
 
-        # TODO: Move this map as a private variable to cookiecutter.json when this
-        # https://github.com/cookiecutter/cookiecutter/issues/1582 is resolved
-        pypi_license_map = {
-            "MIT License": "License :: OSI Approved :: MIT License",
-            "BSD 2-Clause License": "License :: OSI Approved :: BSD License",
-            "BSD 3-Clause License": "License :: OSI Approved :: BSD License",
-            "ISC License": "License :: OSI Approved :: ISC License (ISCL)",
-            "Apache License Version 2.0": "License :: OSI Approved :: Apache Software License",
-            "GNU General Public License Version 3": "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
-            "Unlicense": "License :: OSI Approved :: The Unlicense (Unlicense)",
-            "Not open source": "",
-        }
+        assert "" not in project_metadata["project"]["classifiers"]
 
         if license != "Not open source":
             assert (
