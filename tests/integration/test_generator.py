@@ -57,10 +57,12 @@ def run_generated_project_assertions(generated_project, **kwargs):
     # Make sure correct context was passed to cookiecutter
     assert generated_project.context["project_name"] == project_name
     assert (
-        generated_project.context["project_name_snake_case"] == project_name_snake_case
+        generated_project.context["__project_name_snake_case"]
+        == project_name_snake_case
     )
     assert (
-        generated_project.context["project_name_kebab_case"] == project_name_kebab_case
+        generated_project.context["__project_name_kebab_case"]
+        == project_name_kebab_case
     )
     assert generated_project.context["project_description"] == project_description
     assert generated_project.context["author_full_name"] == author_full_name
