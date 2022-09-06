@@ -47,7 +47,7 @@ exclude = []
 [tool.isort]
 multi_line_output = 3
 profile = "black"
-skip = [".generated", "{{cookiecutter.project_name_kebab_case}}"]
+skip = [".generated", "{{cookiecutter.__project_name_kebab_case}}"]
 
 [tool.pytest.ini_options]
 addopts = "--basetemp=.generated --keep-baked-projects"
@@ -61,7 +61,7 @@ exclude = '''
 |dist
 |docs
 |.generated
-|{{cookiecutter.project_name_kebab_case}}
+|{{cookiecutter.__project_name_kebab_case}}
 )/
 '''
 target-version = ['py39']
@@ -70,7 +70,7 @@ target-version = ['py39']
 check_untyped_defs = true
 disallow_any_generics = true
 disallow_untyped_defs = true
-exclude = "{{cookiecutter.project_name_kebab_case}}/"
+exclude = "{{cookiecutter.__project_name_kebab_case}}/"
 follow_imports = "silent"
 ignore_missing_imports = true
 strict_optional = true

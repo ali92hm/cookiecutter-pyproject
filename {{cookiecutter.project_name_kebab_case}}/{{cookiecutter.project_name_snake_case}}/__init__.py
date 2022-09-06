@@ -1,4 +1,4 @@
-__title__ = "{{ cookiecutter.project_name_kebab_case }}"
+__title__ = "{{ cookiecutter.__project_name_kebab_case }}"
 __description__ = "{{ cookiecutter.project_description }}"
 __url__ = "{{ cookiecutter.project_repo }}/blob/master/README.md"
 __author__ = "{{ cookiecutter.author_full_name }}"

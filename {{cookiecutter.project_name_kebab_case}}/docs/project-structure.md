@@ -1,7 +1,7 @@
 # Project structure
 
 ```
-{{cookiecutter.project_name_kebab_case}}
+{{cookiecutter.__project_name_kebab_case}}
 .
 ├── .editorconfig - Universal editor configuration
 ├── .gitignore - Gitignore file
@@ -23,11 +23,11 @@
 ├── .vscode - Folder containing VSCode settings
 │ ├── extensions.json - Suggested VSCode extensions for this project
 │ └── settings.json - VSCode settings for the project
-├── {{cookiecutter.project_name_snake_case}} - The folder containing the source code for the project
+├── {{cookiecutter.__project_name_snake_case}} - The folder containing the source code for the project
 │ ├── cli - The submodule for the client code
 │ ├── __init__.py - The __init__ file for the parent project.
 │ ├── __main__.py - The __main__ file for the parent project
-│ └── {{cookiecutter.project_name_snake_case}}.py - The dummy generated file
+│ └── {{cookiecutter.__project_name_snake_case}}.py - The dummy generated file
 ├── docs - Documents for the project
 │ ├── development-instructions.md - Instructions for setting up the development environment to work on this project
 │ ├── first-time-setup.md - Instructions for a completing the setup of a newly created project

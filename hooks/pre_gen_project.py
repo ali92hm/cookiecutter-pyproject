@@ -14,7 +14,7 @@ def is_validate_python_project_name(project_name_snake_case: str) -> bool:
 
 if __name__ == "__main__":
     if not is_validate_python_project_name(
-        "{{ cookiecutter.project_name_snake_case }}"
+        "{{ cookiecutter.__project_name_snake_case }}"
     ):
-        project_name = "{{ cookiecutter.project_name_snake_case }}"
+        project_name = "{{ cookiecutter.__project_name_snake_case }}"
         raise Exception(f"Error: {project_name} is not a valid Python module name!")
