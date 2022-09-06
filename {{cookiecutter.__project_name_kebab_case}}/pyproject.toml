@@ -14,21 +14,8 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
   "Operating System :: OS Independent",
-  {% if cookiecutter.license == 'MIT License' -%}
-  "License :: OSI Approved :: MIT License",
-  {%- elif cookiecutter.license == 'BSD 2-Clause License' -%}
-  "License :: OSI Approved :: BSD License",
-  {%- elif cookiecutter.license == 'BSD 3-Clause License' -%}
-  "License :: OSI Approved :: BSD License",
-  {%- elif cookiecutter.license == 'ISC License' -%}
-  "License :: OSI Approved :: ISC License (ISCL)",
-  {%- elif cookiecutter.license == 'Apache License Version 2.0' -%}
-  "License :: OSI Approved :: Apache Software License",
-  {%- elif cookiecutter.license == 'GNU General Public License Version 3' -%}
-  "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
-  {%- elif cookiecutter.license == 'Unlicense' -%}
-  "License :: OSI Approved :: The Unlicense (Unlicense)",
-  {%- endif %}
+  {% if cookiecutter.license != 'Not open source' %}"{{ cookiecutter._pypi_license_map[cookiecutter.license] }}",
+  {% endif -%}
   "Typing :: Typed",
 ]
 
@@ -39,9 +26,8 @@ description = "{{ cookiecutter.project_description }}"
 keywords = [
   # fill me
 ]
-{% if cookiecutter.license != 'Not open source' -%}
-license = {file = "LICENSE"}
-{%- endif %}
+{% if cookiecutter.license != 'Not open source' -%}license = {file = "LICENSE"}
+{% endif -%}
 maintainers = [
   {name = "{{ cookiecutter.author_full_name }}", email = "{{ cookiecutter.author_email }}"},
 ]
