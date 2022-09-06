@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 
 import pytest
-import toml
+import tomli
 
 from hooks import pre_gen_project
 
@@ -130,8 +130,8 @@ def run_generated_project_assertions(generated_project, **kwargs):
         assert f"{project_repo}/actions/workflows/tests.yml/badge.svg" in readme_content
 
     # Project.toml file assertions
-    with open(os.path.join(project_path, "pyproject.toml"), "r") as pyproj_file:
-        project_metadata = toml.load(pyproj_file)
+    with open(os.path.join(project_path, "pyproject.toml"), "rb") as pyproj_file:
+        project_metadata = tomli.load(pyproj_file)
 
         assert project_metadata["project"]["name"] == project_name_snake_case.replace(
             "_", "-"
