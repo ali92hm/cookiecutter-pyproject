@@ -1,14 +1,25 @@
 #!/usr/bin/env python
 
-import os
+from pathlib import Path
+import shutil
 import subprocess
 
 if __name__ == "__main__":
-    GENERATED_DIR = os.path.abspath(os.path.curdir)
+    generated_dir = Path().absolute()
 
     license = "{{ cookiecutter.license }}"
 
     if license == "Not open source":
-        subprocess.run("rm LICENSE", cwd=GENERATED_DIR, shell=True, check=True)
+        subprocess.run("rm LICENSE", cwd=generated_dir, shell=True, check=True)
 
-    subprocess.run("git init", cwd=GENERATED_DIR, shell=True, check=True)
+    replay_file_src = (
+        Path().home().joinpath(".cookiecutter_replay", "cookiecutter-pyproject.json")
+    )
+
+    replay_file_dest = generated_dir.joinpath(".cookiecutterrc.json")
+
+    shutil.copyfile(
+        replay_file_src,
+        replay_file_dest,
+    )
+    subprocess.run("git init", cwd=generated_dir, shell=True, check=True)
