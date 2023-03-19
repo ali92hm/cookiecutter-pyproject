@@ -17,7 +17,7 @@ Read the [development instructions] to get started with development
 
 ### System requirements
 
--   [python] >= 3.7 (comes with pip)
+-   [python] >= 3.8 (comes with pip)
 
 <!-- Add me -->
 
