@@ -6,4 +6,4 @@
 [flake8]
 max-line-length = 120
 extend-ignore = E203
-exclude=dist,docs,.generated,{{cookiecutter.__project_name_kebab_case}}
+exclude=.venv,venv,dist,docs,.generated,{{cookiecutter.__project_name_kebab_case}}
