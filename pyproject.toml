@@ -7,10 +7,10 @@ classifiers = [
   "Intended Audience :: Developers",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.7",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
   "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
 ]
@@ -23,7 +23,7 @@ maintainers = [
 ]
 name = "cookiecutter-pyproject"
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 version = "0.1.0"
 
 [project.urls]
@@ -36,7 +36,7 @@ repository = "https://github.com/ali92hm/cookiecutter-pyproject"
 build-backend = "setuptools.build_meta"
 requires = [
   "setuptools>=65",
-  "wheel>=0.37",
+  "wheel>=0.38",
 ]
 
 [tool.setuptools.packages.find]
@@ -47,7 +47,7 @@ exclude = []
 [tool.isort]
 multi_line_output = 3
 profile = "black"
-skip = [".generated", "{{cookiecutter.__project_name_kebab_case}}"]
+skip = [".venv", "venv", ".generated", "{{cookiecutter.__project_name_kebab_case}}"]
 
 [tool.pytest.ini_options]
 addopts = "--basetemp=.generated --keep-baked-projects"
@@ -58,13 +58,14 @@ testpaths = [
 [tool.black]
 exclude = '''
 /(
+|.venv
+|venv
 |dist
 |docs
 |.generated
 |{{cookiecutter.__project_name_kebab_case}}
 )/
 '''
-target-version = ['py39']
 
 [tool.mypy]
 check_untyped_defs = true
@@ -76,6 +77,8 @@ ignore_missing_imports = true
 strict_optional = true
 warn_redundant_casts = true
 warn_unused_ignores = true
+explicit_package_bases = true
+namespace_packages = true
 
 [[tool.mypy.overrides]]
 ignore_errors = true
