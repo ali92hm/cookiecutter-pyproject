@@ -23,7 +23,7 @@ You can read more about these choices under [Tool choices and design considerati
 
 ### System requirement
 
--   [python] >= 3.7 (comes with pip)
+-   [python] >= 3.8 (comes with pip)
 -   [cookiecutter] >= 2.1.1
 
 ### Generating your first project

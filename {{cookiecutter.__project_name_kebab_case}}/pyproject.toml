@@ -7,10 +7,10 @@ classifiers = [
   "Development Status :: 3 - Alpha",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.7",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
   "Operating System :: OS Independent",
@@ -33,7 +33,7 @@ maintainers = [
 ]
 name = "{{ cookiecutter.__project_name_kebab_case }}"
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 version = "0.1.0"
 
 [project.urls]
@@ -60,7 +60,7 @@ exclude = []
 [tool.isort]
 multi_line_output = 3
 profile = "black"
-skip = []
+skip = ['.venv', 'venv']
 
 [tool.pytest.ini_options]
 testpaths = [
@@ -70,11 +70,12 @@ testpaths = [
 [tool.black]
 exclude = '''
 /(
+|.venv
+|venv
 |dist
 |docs
 )/
 '''
-target-version = ['py39']
 
 [tool.mypy]
 check_untyped_defs = true
@@ -85,6 +86,8 @@ ignore_missing_imports = true
 strict_optional = true
 warn_redundant_casts = true
 warn_unused_ignores = true
+explicit_package_bases = true
+namespace_packages = true
 
 [[tool.mypy.overrides]]
 ignore_errors = true

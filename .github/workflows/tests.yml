@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.7", "3.8", "3.9", "3.10"]
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
         # The following issue on pytest-cookies is preventing the tests to run correctly
         # on windows. Until then, we want to not run the tests on windows
         # https://github.com/hackebrot/pytest-cookies/issues/62
