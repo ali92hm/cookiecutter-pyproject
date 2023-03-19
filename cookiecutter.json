@@ -17,6 +17,7 @@
         "Unlicense",
         "Not open source"
     ],
+    "_template_version": "0.1.0",
     "_pypi_license_map": {
         "MIT License": "License :: OSI Approved :: MIT License",
         "BSD 2-Clause License": "License :: OSI Approved :: BSD License",
