@@ -7,3 +7,4 @@ pytest-cov==4.0.0
 build==0.10.0
 cookiecutter==2.1.1
 pytest-cookies==0.6.1
+tomli==2.0.1 # Only used by unit tests
