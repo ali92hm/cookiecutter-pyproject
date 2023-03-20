@@ -34,3 +34,6 @@ ci: check-style check-types test
 
 link:
 	pip install --editable .
+
+upgrade-project:
+	./scripts/upgrade-project.sh
