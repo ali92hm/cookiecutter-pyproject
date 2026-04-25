@@ -7,28 +7,28 @@ classifiers = [
   "Intended Audience :: Developers",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
   "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
 ]
 dependencies = []
 description = "A cookiecutter for generating a basic scaffolding for python projects"
+dynamic = ["version"]
 keywords = ["cookiecutter", "python", "project", "generator"]
 license = {file = "LICENSE"}
 maintainers = [
   {name = "Ali Hajimirza (ali92hm)", email = "ali@alihm.net"},
 ]
 name = "cookiecutter-pyproject"
-readme = "README.md"
-requires-python = ">=3.8"
-version = "0.1.0"
+readme = {file = "README.md", content-type = "text/markdown"}
+requires-python = ">=3.10"
 
 [project.urls]
-changelog = "github.com/ali92hm/cookiecutter-pyproject/blob/master/CHANGELOG.md"
-documentation = "github.com/ali92hm/cookiecutter-pyproject/blob/master/README.md"
+changelog = "https://github.com/ali92hm/cookiecutter-pyproject/blob/master/CHANGELOG.md"
+documentation = "https://github.com/ali92hm/cookiecutter-pyproject/blob/master/README.md"
 homepage = "https://github.com/ali92hm/cookiecutter-pyproject"
 repository = "https://github.com/ali92hm/cookiecutter-pyproject"
 
@@ -39,10 +39,13 @@ requires = [
   "wheel>=0.38",
 ]
 
+[tool.setuptools.dynamic]
+version = {file = "VERSION"}
+
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["*"]
-exclude = []
+include = ["hooks*"]
+exclude = ["tests*"]
 
 [tool.isort]
 multi_line_output = 3
