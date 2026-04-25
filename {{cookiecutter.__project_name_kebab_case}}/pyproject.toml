@@ -7,10 +7,10 @@ classifiers = [
   "Development Status :: 3 - Alpha",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
   "Operating System :: OS Independent",
@@ -23,6 +23,7 @@ dependencies = [
   # fill me
 ]
 description = "{{ cookiecutter.project_description }}"
+dynamic = ["version"]
 keywords = [
   # fill me
 ]
@@ -32,9 +33,8 @@ maintainers = [
   {name = "{{ cookiecutter.author_full_name }}", email = "{{ cookiecutter.author_email }}"},
 ]
 name = "{{ cookiecutter.__project_name_kebab_case }}"
-readme = "README.md"
-requires-python = ">=3.8"
-version = "0.1.0"
+readme = {file = "README.md", content-type = "text/markdown"}
+requires-python = ">=3.10"
 
 [project.urls]
 changelog = "{{ cookiecutter.project_repo }}/blob/master/CHANGELOG.md"
@@ -51,6 +51,9 @@ requires = [
   "setuptools>=65",
   "wheel>=0.38",
 ]
+
+[tool.setuptools.dynamic]
+version = {attr = "{{ cookiecutter.__project_name_snake_case }}.__version__"}
 
 [tool.setuptools.packages.find]
 where = ["."]
@@ -92,3 +95,10 @@ namespace_packages = true
 [[tool.mypy.overrides]]
 ignore_errors = true
 module = "tests.*"
+
+[tool.coverage.run]
+source = ["{{ cookiecutter.__project_name_snake_case }}"]
+omit = ["tests/*"]
+
+[tool.coverage.report]
+show_missing = true
