@@ -40,6 +40,14 @@ def test_get_project_name_snake_case(name_input, expected):
         ("TeST proJect134", False),
         ("Test^&Project", False),
         ("Te_st-Pro_-jct", False),
+        ("a", True),
+        ("_", True),
+        ("__init__", True),
+        ("class", False),
+        ("import", False),
+        ("lambda", False),
+        ("None", False),
+        ("True", False),
     ],
 )
 def test_is_validate_python_project_name(name_input, expected):

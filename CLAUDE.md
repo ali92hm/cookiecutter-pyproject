@@ -88,7 +88,8 @@ when the change could break the generated project's own tooling.
 ## Adding or renaming a cookiecutter variable
 
 1. Add it to `cookiecutter.json`. Names prefixed `__` are computed/derived; `_` are private
-   (e.g. `_pypi_license_map`, which maps a license choice to its PyPI classifier).
+   (e.g. `_spdx_license_map`, which maps a license choice to its SPDX identifier for the
+   `license` field in the generated `pyproject.toml`).
 2. Use it in the template tree.
 3. Update `tests/integration/test_generator.py`:
    `run_generated_project_assertions` reads defaults straight from `cookiecutter.json`,
@@ -103,5 +104,5 @@ when the change could break the generated project's own tooling.
 - Version lives in `VERSION` (dynamic via setuptools) for this repo; generated projects use
   `__version__` in their package `__init__.py`.
 - Dependencies are pinned exactly (`==`) in both `requirements.txt` files.
-- Supported Python: >= 3.10; CI matrix is 3.10–3.13 across ubuntu/macOS/windows.
+- Supported Python: >= 3.11; CI matrix is 3.11–3.14 across ubuntu/macOS/windows.
 - Default branch is `master`.

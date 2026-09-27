@@ -22,6 +22,7 @@ cookiecutter-pyproject
 │ ├── workflows - Github Actions workflows
 │ │ ├── tests.yml - Runs style checks, type checks and tests on push/PR
 │ │ └── release.yml - Cuts a GitHub release when a v* tag is pushed
+│ ├── dependabot.yml - Keeps pip and GitHub Actions dependencies up to date
 │ └── PULL_REQUEST_TEMPLATE.md - Pull request template
 ├── .vscode - Folder containing VSCode settings
 │ ├── extensions.json - Suggested VSCode extensions for this project

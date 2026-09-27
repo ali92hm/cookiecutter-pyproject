@@ -34,6 +34,9 @@ There are several useful commands in the `Makefile`, here is how to use them:
 - `make check-version TAG=v1.2.3` checks that a tag matches `__version__` (used by CI)
 - `make release-tag` creates the release tag for the current `__version__`
 
+Any of the `test-*` targets accept extra pytest arguments through `ARGS`, for example
+`make test-unit ARGS="-k test_add -v"`.
+
 ## Releasing
 
 Releases are cut by pushing a version tag, so that you decide when a set of merged changes becomes a release.

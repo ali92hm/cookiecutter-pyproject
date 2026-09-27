@@ -7,15 +7,13 @@ classifiers = [
   "Development Status :: 3 - Alpha",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
   "Operating System :: OS Independent",
-  {% if cookiecutter.license != 'Not open source' %}"{{ cookiecutter._pypi_license_map[cookiecutter.license] }}",
-  {% endif -%}
   "Typing :: Typed",
 ]
 
@@ -27,14 +25,16 @@ dynamic = ["version"]
 keywords = [
   # fill me
 ]
-{% if cookiecutter.license != 'Not open source' -%}license = {file = "LICENSE"}
+{% if cookiecutter.license != 'Not open source' -%}
+license = "{{ cookiecutter._spdx_license_map[cookiecutter.license] }}"
+license-files = ["LICENSE"]
 {% endif -%}
 maintainers = [
   {name = "{{ cookiecutter.author_full_name }}", email = "{{ cookiecutter.author_email }}"},
 ]
 name = "{{ cookiecutter.__project_name_kebab_case }}"
 readme = {file = "README.md", content-type = "text/markdown"}
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 
 [project.urls]
 changelog = "{{ cookiecutter.project_repo }}/blob/master/CHANGELOG.md"
@@ -57,8 +57,8 @@ version = {attr = "{{ cookiecutter.__project_name_snake_case }}.__version__"}
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["*"]
-exclude = []
+include = ["{{ cookiecutter.__project_name_snake_case }}*"]
+exclude = ["tests*"]
 
 [tool.isort]
 multi_line_output = 3
@@ -71,6 +71,7 @@ testpaths = [
 ]
 
 [tool.black]
+target-version = ["py311"]
 exclude = '''
 /(
 |.venv
