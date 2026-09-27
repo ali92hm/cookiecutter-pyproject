@@ -9,33 +9,37 @@ cookiecutter-pyproject
 ├── CODE_OF_CONDUCT.md - CODE_OF_CONDUCT file for interacting with this repo
 ├── CONTRIBUTING.md - Instructions for contributing to this project
 ├── pyproject.toml - Contains the metadata for this python project as well as configuration for some of the tools
-├── requirements_dev.txt - List of external python libraries that this project depends on
-├── setup.py - Instructions for building and installing a python package.
-├── LICENSE - License file (only for open source projects)
+├── requirements.txt - List of external python libraries that this project depends on
+├── VERSION - The current version of this project, read dynamically by pyproject.toml
+├── LICENSE - License file for this repo
 ├── Makefile - Makefile containing the common commands for the project
 ├── README.md - README file
-├── .generated - Contains the generated projects during test
-├── .reports - Contains the result of rest runs in Junit format
+├── .generated - Contains the generated (baked) projects created during tests, safe to delete
+├── .reports - Contains the result of test runs in JUnit format, safe to delete
 ├── .flake8 - Flake8 configuration file
 ├── .github - Folder containing github settings and files
 │ ├── ISSUE_TEMPLATE - Contains issue templates for bug report and questions
-│ ├── workflows - Github action workflows for building and deploying the website
+│ ├── workflows - Github Actions workflow for running tests on push/PR
 │ └── PULL_REQUEST_TEMPLATE.md - Pull request template
 ├── .vscode - Folder containing VSCode settings
 │ ├── extensions.json - Suggested VSCode extensions for this project
 │ └── settings.json - VSCode settings for the project
 ├── cookiecutter.json - Defines the cookiecutter variables for this template
-├── {{cookiecutter.__project_name_snake_case}} - The folder containing the templated project that will be rendered on execution
+├── {{cookiecutter.__project_name_kebab_case}} - The Jinja2-templated project tree that gets rendered on generation
+│ ├── {{cookiecutter.__project_name_snake_case}} - The generated project's source package
+│ ├── tests - Unit and integration tests for the generated project
+│ ├── scripts - Utility bash files for the generated project
+│ └── ... - pyproject.toml, Makefile, README.md, LICENSE, etc. for the generated project
 ├── hooks - Cookiecutter hooks
-│ ├── pre_gen_project.py - The script that runs before the project artifact generation
-│ └── post_gen_project.py - The script that runs after the project artifact generation
+│ ├── pre_gen_project.py - Runs before generation; validates the project name is a legal Python identifier
+│ └── post_gen_project.py - Runs after generation; removes LICENSE if "Not open source" and runs git init
 ├── docs - Documents for the project
 │ ├── development-instructions.md - Instructions for setting up the development environment to work on this project
 │ ├── tool-choices.md - A description of the tools used in this project
-│ └── project-structure.md - Structure of the project and an explanations of the files and folders
-├── tests - Contains hugo layout (html) files
-│ ├── e2e - Contains the end to end tests
-│ ├── integration - Contains the integration test files and data
-│ └── unit - Contains the unit test files for the project
-└── scripts - Contains utility bash files for building and deploying the project
+│ └── project-structure.md - Structure of the project and an explanation of the files and folders
+├── tests - Tests that bake the template and assert the generated output is correct
+│ ├── e2e - Bakes the template, then runs make init/ci/build/clean inside the generated project
+│ ├── integration - Bakes the template with various inputs and asserts the generated files/content
+│ └── unit - Unit tests for the helper functions in hooks/pre_gen_project.py
+└── scripts - Contains utility bash files for building, testing, and cleaning this repo
 ```
