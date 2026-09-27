@@ -1,31 +1,51 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 
-name: release
+name: Release
+
+# Releases are cut by pushing a version tag, never by merging to master.
+# See docs/development-instructions.md for the release process.
 on:
-  workflow_run:
-    workflows:
-      - tests
-    branches: master
-    types:
-      - completed
+  push:
+    tags:
+      - "v*"
 
 jobs:
-{%- raw %}
   build-and-release:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    timeout-minutes: 15
+    permissions:
+      # Required to create the GitHub release
+      contents: write
+      {%- if cookiecutter.license != 'Not open source' %}
+      # Required for PyPI trusted publishing
+      id-token: write
+      {%- endif %}
     steps:
       - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
       - name: Initialize project
         run: |
           make init
+      - name: Verify the tag matches the package version
+        run: |
+          ./scripts/check-version.sh "$GITHUB_REF_NAME"
+      - name: Run ci tests
+        run: |
+          make ci
       - name: Build package
         run: |
           make build
-      - name: release package
+      {%- if cookiecutter.license != 'Not open source' %}
+      - name: Publish package to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+      {%- endif %}
+      - name: Create GitHub release
         run: |
-          make release
+          gh release create "$GITHUB_REF_NAME" --generate-notes dist/*
         env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+{%- raw %}
+          GH_TOKEN: ${{ github.token }}
 {%- endraw %}

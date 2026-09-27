@@ -27,8 +27,11 @@ test: test-unit test-integration
 build: clean
 	python -m build
 
-release:
-	twine upload dist/*
+check-version:
+	./scripts/check-version.sh $(TAG)
+
+release-tag:
+	./scripts/release-tag.sh
 
 ci: check-style check-types test
 
