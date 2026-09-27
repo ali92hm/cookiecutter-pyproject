@@ -30,6 +30,12 @@ test: test-unit test-integration test-e2e
 build: clean
 	python -m build
 
+check-version:
+	./scripts/check-version.sh $(TAG)
+
+release-tag:
+	./scripts/release-tag.sh
+
 ci: check-style check-types test
 
 generate:

@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: Release
+
+# Releases are cut by pushing a version tag, never by merging to master.
+# See docs/development-instructions.md for the release process.
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      # Required to create the GitHub release
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Initialize project
+        run: |
+          make init
+      - name: Verify the tag matches the package version
+        run: |
+          ./scripts/check-version.sh "$GITHUB_REF_NAME"
+      - name: Run ci tests
+        run: |
+          make ci
+      - name: Build package
+        run: |
+          make build
+      - name: Create GitHub release
+        run: |
+          gh release create "$GITHUB_REF_NAME" --generate-notes dist/*
+        env:
+          GH_TOKEN: ${{ github.token }}
