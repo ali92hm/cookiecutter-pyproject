@@ -128,6 +128,41 @@ def run_generated_project_assertions(generated_project, **kwargs):
     assert "__init__.py" in integration_test_files
     assert f"test_{project_name_snake_case}.py" in integration_test_files
 
+    # Check the scripts folder
+    script_files = os.listdir(os.path.join(project_path, "scripts"))
+    assert "check-version.sh" in script_files
+    assert "release-tag.sh" in script_files
+
+    with open(
+        os.path.join(project_path, "scripts", "check-version.sh"), "r"
+    ) as check_version_file:
+        check_version_content = check_version_file.read()
+        assert project_name_snake_case in check_version_content
+
+    # Check the github workflows
+    workflow_files = os.listdir(os.path.join(project_path, ".github", "workflows"))
+    assert "tests.yml" in workflow_files
+    assert "release.yml" in workflow_files
+
+    with open(
+        os.path.join(project_path, ".github", "workflows", "release.yml"), "r"
+    ) as release_file:
+        release_content = release_file.read()
+        # Releases are cut by pushing a tag, not by merging to master
+        assert 'tags:\n      - "v*"' in release_content
+        assert "workflow_run" not in release_content
+        # Jinja must be fully rendered, but github expressions must survive
+        assert "{%" not in release_content
+        assert "cookiecutter." not in release_content
+        assert "${{ github.token }}" in release_content
+        # Closed source projects must not publish to a public index
+        if license == "Not open source":
+            assert "pypi" not in release_content.lower()
+            assert "id-token" not in release_content
+        else:
+            assert "pypa/gh-action-pypi-publish" in release_content
+            assert "id-token: write" in release_content
+
     # Check readme
     with open(os.path.join(project_path, "README.md"), "r") as readme_file:
         readme_content = readme_file.read()
