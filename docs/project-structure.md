@@ -19,7 +19,9 @@ cookiecutter-pyproject
 ├── .flake8 - Flake8 configuration file
 ├── .github - Folder containing github settings and files
 │ ├── ISSUE_TEMPLATE - Contains issue templates for bug report and questions
-│ ├── workflows - Github Actions workflow for running tests on push/PR
+│ ├── workflows - Github Actions workflows
+│ │ ├── tests.yml - Runs style checks, type checks and tests on push/PR
+│ │ └── release.yml - Cuts a GitHub release when a v* tag is pushed
 │ └── PULL_REQUEST_TEMPLATE.md - Pull request template
 ├── .vscode - Folder containing VSCode settings
 │ ├── extensions.json - Suggested VSCode extensions for this project
@@ -41,5 +43,14 @@ cookiecutter-pyproject
 │ ├── e2e - Bakes the template, then runs make init/ci/build/clean inside the generated project
 │ ├── integration - Bakes the template with various inputs and asserts the generated files/content
 │ └── unit - Unit tests for the helper functions in hooks/pre_gen_project.py
-└── scripts - Contains utility bash files for building, testing, and cleaning this repo
+└── scripts - Contains utility bash files for building, testing, releasing and cleaning this repo
+  ├── check-style.sh - Runs flake8, isort and black in check mode
+  ├── fix-style.sh - Applies black and isort
+  ├── test-unit.sh - Runs the unit test suite
+  ├── test-integration.sh - Runs the integration test suite
+  ├── test-e2e.sh - Runs the end to end test suite
+  ├── generate.sh - Bakes the template into .generated/manual for manual inspection
+  ├── check-version.sh - Asserts a given tag matches the VERSION file (used by the release workflow)
+  ├── release-tag.sh - Creates the v<version> release tag for the current VERSION
+  └── clean.sh - Removes generated files and folders
 ```

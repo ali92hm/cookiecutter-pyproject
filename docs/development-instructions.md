@@ -31,6 +31,32 @@ There are several useful commands in the `Makefile`, here is how to use them:
 -   `make test` runs all of the test suites (unit and integration)
 -   `make build` builds the python wheel distribution
 -   `make ci` runs the all style checks and tests (used by CI)
+-   `make check-version TAG=v1.2.3` checks that a tag matches the `VERSION` file (used by CI)
+-   `make release-tag` creates the release tag for the current `VERSION`
+
+## Releasing
+
+Merging a pull request does **not** publish a release. Releases are cut by pushing a
+version tag, so that you decide when a set of merged changes becomes a release. This
+project is a cookiecutter template and is consumed via `cookiecutter gh:...` rather than
+`pip install`, so a release here means a git tag and a GitHub release, not a PyPI upload.
+
+To cut a release:
+
+1.  Bump the `VERSION` file following [semantic versioning].
+2.  Move the entries under `## [Unreleased]` in `CHANGELOG.md` into a new section for
+    the version you are releasing.
+3.  Open a pull request with those changes and merge it once CI is green.
+4.  Check out the merge commit on `master` and run `make release-tag`. This creates an
+    annotated `v<version>` tag and prints the command to push it.
+5.  Push the tag. The `Release` workflow then verifies that the tag matches `VERSION`,
+    runs the test suite, builds the package, and creates a GitHub release with the build
+    artifacts attached.
+
+If the tag and `VERSION` disagree, the release workflow fails before it creates
+anything.
+
+[semantic versioning]: https://semver.org/spec/v2.0.0.html
 
 [virtualenv]: https://virtualenv.pypa.io/en/latest/user_guide.html
 [pew]: https://github.com/berdario/pew
