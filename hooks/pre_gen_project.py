@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import re
+import keyword
 
 
 def get_project_name_kebab_case(project_name: str) -> str:
@@ -12,9 +12,9 @@ def get_project_name_snake_case(project_name: str) -> str:
 
 
 def is_validate_python_project_name(project_name_snake_case: str) -> bool:
-    MODULE_REGEX = r"^[_a-zA-Z][_a-zA-Z0-9]+$"
-
-    return True if re.match(MODULE_REGEX, project_name_snake_case) else False
+    return project_name_snake_case.isidentifier() and not keyword.iskeyword(
+        project_name_snake_case
+    )
 
 
 if __name__ == "__main__":

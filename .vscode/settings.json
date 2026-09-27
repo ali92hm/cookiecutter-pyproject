@@ -14,17 +14,12 @@
         ".mypy_cache": true,
         ".pytest_cache": true
     },
-    // Pythong testing
+    // Python testing
     "python.testing.pytestArgs": ["tests"],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
-    // Python linting
-    "python.linting.enabled": true,
-    "python.linting.mypyEnabled": true,
-    "python.linting.flake8Enabled": true,
-    // Python formatting
-    "python.formatting.provider": "black",
+    // Python formatting (provided by the ms-python.black-formatter extension)
     "[python]": {
-        "editor.defaultFormatter": "ms-python.python"
+        "editor.defaultFormatter": "ms-python.black-formatter"
     }
 }

@@ -7,24 +7,24 @@ classifiers = [
   "Intended Audience :: Developers",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
-  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.14",
   "Operating System :: OS Independent",
 ]
 dependencies = []
 description = "A cookiecutter for generating a basic scaffolding for python projects"
 dynamic = ["version"]
 keywords = ["cookiecutter", "python", "project", "generator"]
-license = {file = "LICENSE"}
+license = "MIT"
+license-files = ["LICENSE"]
 maintainers = [
   {name = "Ali Hajimirza (ali92hm)", email = "ali@alihm.net"},
 ]
 name = "cookiecutter-pyproject"
 readme = {file = "README.md", content-type = "text/markdown"}
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 
 [project.urls]
 changelog = "https://github.com/ali92hm/cookiecutter-pyproject/blob/master/CHANGELOG.md"
@@ -59,6 +59,7 @@ testpaths = [
 ]
 
 [tool.black]
+target-version = ["py311"]
 exclude = '''
 /(
 |.venv
@@ -86,3 +87,10 @@ namespace_packages = true
 [[tool.mypy.overrides]]
 ignore_errors = true
 module = "tests.*"
+
+[tool.coverage.run]
+source = ["hooks"]
+omit = ["tests/*"]
+
+[tool.coverage.report]
+show_missing = true

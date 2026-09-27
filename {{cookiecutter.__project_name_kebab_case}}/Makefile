@@ -1,4 +1,5 @@
-.PHONY: clean
+.PHONY: init clean check-style fix-style check-types test-unit test-integration \
+	test check-version release-tag ci link build
 .DEFAULT_GOAL:= init
 
 init:

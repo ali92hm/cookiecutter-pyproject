@@ -28,7 +28,7 @@ def run_generated_project_assertions(generated_project, **kwargs):
         + f"{pre_gen_project.get_project_name_kebab_case(project_name)}"
     )
     license = cookie_cutter_file["license"][0]
-    pypi_license_map = cookie_cutter_file["_pypi_license_map"]
+    spdx_license_map = cookie_cutter_file["_spdx_license_map"]
 
     # Replace these variables if an override is given
     if "project_name" in kwargs:
@@ -195,19 +195,18 @@ def run_generated_project_assertions(generated_project, **kwargs):
 
         if license == "Not open source":
             assert "license" not in project_metadata["project"]
+            assert "license-files" not in project_metadata["project"]
         else:
-            assert project_metadata["project"]["license"]["file"] == "LICENSE"
+            assert project_metadata["project"]["license"] == spdx_license_map[license]
+            assert project_metadata["project"]["license-files"] == ["LICENSE"]
 
         assert "" not in project_metadata["project"]["classifiers"]
-
-        if license != "Not open source":
-            assert (
-                pypi_license_map[license] in project_metadata["project"]["classifiers"]
-            )
-        else:
-            for _, value in pypi_license_map.items():
-                # None of these items should be in the array
-                assert value not in project_metadata["project"]["classifiers"]
+        # PEP 639: license classifiers are deprecated in favor of the license field
+        # above, and this project doesn't emit any regardless of license choice.
+        assert not any(
+            classifier.startswith("License ::")
+            for classifier in project_metadata["project"]["classifiers"]
+        )
 
         assert project_name_kebab_case in project_metadata["project"]["scripts"]
         assert (

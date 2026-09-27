@@ -1,13 +1,27 @@
+import os
 import subprocess
+import venv
 
 
 def install_dep_and_run_ci(generated_project):
     project_path = generated_project.project_path
 
-    subprocess.run("make init", cwd=project_path, shell=True, check=True)
-    subprocess.run("make ci", cwd=project_path, shell=True, check=True)
-    subprocess.run("make build", cwd=project_path, shell=True, check=True)
-    subprocess.run("make clean", cwd=project_path, shell=True, check=True)
+    # Install the generated project's own dependencies into a throwaway venv rather
+    # than the environment running this test suite, so `make init` here can't leak
+    # packages (or version conflicts) into it.
+    venv_dir = project_path / ".venv"
+    venv.create(venv_dir, with_pip=True)
+
+    venv_bin = venv_dir / ("Scripts" if os.name == "nt" else "bin")
+    env = os.environ.copy()
+    env["PATH"] = os.pathsep.join([str(venv_bin), env.get("PATH", "")])
+    env["VIRTUAL_ENV"] = str(venv_dir)
+    env.pop("PYTHONHOME", None)
+
+    subprocess.run("make init", cwd=project_path, shell=True, check=True, env=env)
+    subprocess.run("make ci", cwd=project_path, shell=True, check=True, env=env)
+    subprocess.run("make build", cwd=project_path, shell=True, check=True, env=env)
+    subprocess.run("make clean", cwd=project_path, shell=True, check=True, env=env)
 
 
 def test_e2e_defaults(cookies):

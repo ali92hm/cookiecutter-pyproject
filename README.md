@@ -23,7 +23,7 @@ You can read more about these choices under [Tool choices and design considerati
 
 ### System requirement
 
--   [python] >= 3.10 (comes with pip)
+-   [python] >= 3.11 (comes with pip)
 -   [cookiecutter] >= 2.1.1
 
 ### Generating your first project
@@ -85,9 +85,9 @@ chat rooms, and mailing lists is expected to follow the [CODE_OF_CONDUCT]
 [cookiecutter]: https://github.com/cookiecutter/cookiecutter
 [file an issue]: https://github.com/ali92hm/cookiecutter-pyproject/issues
 [contributing]: ./CONTRIBUTING.md
-[development instructions]: ./docs/development-instructions
-[tool choices and design considerations]: ./docs/tool-choices
-[project structure]: ./docs/project-structure
+[development instructions]: ./docs/development-instructions.md
+[tool choices and design considerations]: ./docs/tool-choices.md
+[project structure]: ./docs/project-structure.md
 [code_of_conduct]: ./CODE_OF_CONDUCT.md
 [mit license]: http://opensource.org/licenses/MIT
 [osi_certified]: https://opensource.org/trademarks/osi-certified/web/osi-certified-120x100.png
