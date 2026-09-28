@@ -10,4 +10,4 @@ class Test{{ cookiecutter.__project_name_snake_case.capitalize().replace('_', ''
 
     @pytest.mark.skip(reason="Test skiping test")
     def test_skip(self):
-        assert False
+        raise AssertionError

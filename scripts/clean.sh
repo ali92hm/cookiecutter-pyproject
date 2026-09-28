@@ -5,6 +5,7 @@ source ./scripts/include/vars.sh
 
 rm -rf $GENERATED_PROJECTS_FOLDER
 rm -rf .mypy_cache
+rm -rf .ruff_cache
 rm -rf .pytest_cache
 rm -fr dist/
 rm -fr build/

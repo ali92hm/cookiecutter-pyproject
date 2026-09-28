@@ -1,6 +1,6 @@
 # {{ cookiecutter.project_name }}
 
-![CI Tests] ![black badge]
+![CI Tests] ![ruff badge]
 
 {{ cookiecutter.project_description }}
 
@@ -50,7 +50,7 @@ chat rooms, and mailing lists is expected to follow the [CODE_OF_CONDUCT]
 {%- endif %}
 
 [ci tests]: {{ cookiecutter.project_repo }}/actions/workflows/tests.yml/badge.svg
-[black badge]: https://img.shields.io/badge/code%20style-black-000000.svg
+[ruff badge]: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json
 [file an issue]: {{ cookiecutter.project_repo }}/issues
 [contributing]: ./CONTRIBUTING.md
 [code_of_conduct]: ./CODE_OF_CONDUCT.md

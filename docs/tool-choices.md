@@ -17,11 +17,12 @@ around, and why they were chosen.
 
 ## Linting, formatting and typing
 
--   [black] formats code, so there's nothing to bikeshed about formatting in review.
--   [isort] (with black's compatible profile) keeps import order consistent.
--   [flake8] catches the issues black and isort don't (unused imports, undefined names,
-    etc). A separate `.flake8` file is needed because flake8 doesn't yet read
-    configuration from `pyproject.toml` (see [flake8#234]).
+-   [ruff] lints and formats code. It replaces what used to be three separate tools
+    (black, isort, flake8) with a single, much faster one, and it reads its
+    configuration straight from `pyproject.toml` (`[tool.ruff]`), unlike flake8, which
+    [still doesn't][flake8#234]. Its rule selection (`[tool.ruff.lint] select`) is
+    intentionally scoped to what those three tools already checked, rather than ruff's
+    broader default rule set.
 -   [mypy] does static type checking. It's configured fairly strictly
     (`disallow_untyped_defs`, `disallow_any_generics`) to catch real bugs, while `tests.*`
     is exempted since test code doesn't need the same rigor.
@@ -53,9 +54,7 @@ around, and why they were chosen.
 [pep 518]: https://peps.python.org/pep-0518/
 [setuptools]: https://setuptools.pypa.io/en/latest/
 [build]: https://build.pypa.io/en/stable/
-[black]: https://black.readthedocs.io/en/stable/
-[isort]: https://pycqa.github.io/isort/
-[flake8]: https://flake8.pycqa.org/en/latest/
+[ruff]: https://docs.astral.sh/ruff/
 [flake8#234]: https://github.com/PyCQA/flake8/issues/234
 [mypy]: https://mypy.readthedocs.io/en/stable/
 [pytest]: https://docs.pytest.org/en/stable/
