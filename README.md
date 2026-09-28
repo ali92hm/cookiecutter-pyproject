@@ -1,6 +1,6 @@
 # Cookiecutter PyProject
 
-![CI Tests] ![black badge]
+![CI Tests] ![ruff badge]
 
 A [cookiecutter] for generating a _semi-opinionated_ scaffolding for python projects as well as python packages.
 
@@ -9,11 +9,10 @@ A [cookiecutter] for generating a _semi-opinionated_ scaffolding for python proj
 -   Complete structure for a python project
 -   Ready for publishing to [PyPI]
 -   Full Github integration (github actions, issue template, pr templates etc)
--   Code linter using [flake8], [isort], and [black]
--   Code formatting using [isort] and [black]
+-   Linting and formatting using [ruff]
 -   [Pytest] integration for testing
 -   Type checking using [mypy]
--   Using the `pyproject.toml` for most tool configuration,
+-   Using the `pyproject.toml` for all tool configuration,
     project metadata according to [pep 621], and minimum build system requirements according to [pep 518]
 -   More goodies coming soon
 
@@ -81,7 +80,7 @@ chat rooms, and mailing lists is expected to follow the [CODE_OF_CONDUCT]
 [![OSI certified][osi_certified]][mit license]
 
 [ci tests]: https://github.com/ali92hm/cookiecutter-pyproject/actions/workflows/tests.yml/badge.svg
-[black badge]: https://img.shields.io/badge/code%20style-black-000000.svg
+[ruff badge]: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json
 [cookiecutter]: https://github.com/cookiecutter/cookiecutter
 [file an issue]: https://github.com/ali92hm/cookiecutter-pyproject/issues
 [contributing]: ./CONTRIBUTING.md
@@ -93,9 +92,7 @@ chat rooms, and mailing lists is expected to follow the [CODE_OF_CONDUCT]
 [osi_certified]: https://opensource.org/trademarks/osi-certified/web/osi-certified-120x100.png
 [python]: https://www.python.org/downloads/
 [pypi]: https://pypi.org/
-[isort]: https://pycqa.github.io/isort/
-[black]: https://black.readthedocs.io/en/stable/
-[flake8]: https://flake8.pycqa.org/en/latest/
+[ruff]: https://docs.astral.sh/ruff/
 [mypy]: https://mypy.readthedocs.io/en/stable/
 [pytest]: https://docs.pytest.org/en/6.2.x/
 [pep 518]: https://www.python.org/dev/peps/pep-0518/

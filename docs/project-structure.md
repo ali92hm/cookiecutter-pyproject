@@ -16,7 +16,6 @@ cookiecutter-pyproject
 ├── README.md - README file
 ├── .generated - Contains the generated (baked) projects created during tests, safe to delete
 ├── .reports - Contains the result of test runs in JUnit format, safe to delete
-├── .flake8 - Flake8 configuration file
 ├── .github - Folder containing github settings and files
 │ ├── ISSUE_TEMPLATE - Contains issue templates for bug report and questions
 │ ├── workflows - Github Actions workflows
@@ -45,8 +44,8 @@ cookiecutter-pyproject
 │ ├── integration - Bakes the template with various inputs and asserts the generated files/content
 │ └── unit - Unit tests for the helper functions in hooks/pre_gen_project.py
 └── scripts - Contains utility bash files for building, testing, releasing and cleaning this repo
-  ├── check-style.sh - Runs flake8, isort and black in check mode
-  ├── fix-style.sh - Applies black and isort
+  ├── check-style.sh - Runs ruff check and ruff format --check
+  ├── fix-style.sh - Applies ruff check --fix and ruff format
   ├── test-unit.sh - Runs the unit test suite
   ├── test-integration.sh - Runs the integration test suite
   ├── test-e2e.sh - Runs the end to end test suite

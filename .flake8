@@ -1,9 +1,0 @@
-# Unfortunately, flake8 does not yet support reading its config
-# from pyproject.toml according to PEP 518. Until then we have to
-# carry this file to bridge the gap. See
-# https://github.com/PyCQA/flake8/issues/234
-
-[flake8]
-max-line-length = 120
-extend-ignore = E203
-exclude=.venv,venv,dist,docs,.generated,{{cookiecutter.__project_name_kebab_case}}

@@ -60,26 +60,22 @@ where = ["."]
 include = ["{{ cookiecutter.__project_name_snake_case }}*"]
 exclude = ["tests*"]
 
-[tool.isort]
-multi_line_output = 3
-profile = "black"
-skip = ['.venv', 'venv']
-
 [tool.pytest.ini_options]
 testpaths = [
   "tests",
 ]
 
-[tool.black]
-target-version = ["py311"]
-exclude = '''
-/(
-|.venv
-|venv
-|dist
-|docs
-)/
-'''
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+extend-exclude = ["docs"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "W"]
+ignore = ["E203"]
+
+[tool.ruff.lint.pycodestyle]
+max-line-length = 120
 
 [tool.mypy]
 check_untyped_defs = true

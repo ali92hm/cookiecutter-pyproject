@@ -85,7 +85,7 @@ def run_generated_project_assertions(generated_project, **kwargs):
     # Check for top level files/folders to be present
     toplevel_files = os.listdir(project_path)
 
-    assert ".flake8" in toplevel_files
+    assert ".flake8" not in toplevel_files
     if license != "Not open source":
         assert "LICENSE" in toplevel_files
     else:

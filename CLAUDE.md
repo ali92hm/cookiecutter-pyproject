@@ -42,7 +42,7 @@ cat '{{cookiecutter.__project_name_kebab_case}}/pyproject.toml'
 
 Everything under `{{cookiecutter.__project_name_kebab_case}}/` is a Jinja2 template —
 `{{ cookiecutter.x }}`, `{% if %}`, `{% now 'local', '%Y' %}`. This is why every linter in
-the root `pyproject.toml`/`.flake8` excludes that directory (black, isort, flake8, mypy).
+the root `pyproject.toml` excludes that directory (ruff, mypy).
 Consequence: **the template's own Python is never linted or type-checked in place.** It is
 only validated by baking it — `make test-integration` (structure/content assertions) and
 `make test-e2e` (runs the generated project's full `make ci`). Don't "fix" a template file
@@ -55,8 +55,8 @@ selected by the `license` variable.
 
 ```bash
 make init              # pip install -r requirements.txt
-make check-style       # flake8 + isort --check-only + black --check
-make fix-style         # black + isort
+make check-style       # ruff check + ruff format --check
+make fix-style         # ruff check --fix + ruff format
 make check-types       # mypy .
 make test-unit         # tests/unit
 make test-integration  # tests/integration (bakes the template in-process)
@@ -99,7 +99,10 @@ when the change could break the generated project's own tooling.
 
 ## Conventions
 
-- Style: black + isort (`profile = "black"`), flake8 `max-line-length = 120`, `extend-ignore = E203`.
+- Style: ruff (`[tool.ruff]`), one tool for lint + format + import sort. Formatter wraps
+  at 88 (`line-length`); the linter's line-too-long check tolerates up to 120
+  (`[tool.ruff.lint.pycodestyle] max-line-length`) for things like long URLs that
+  can't be wrapped. `E203` is ignored (a known false positive against the formatter).
 - mypy is strict-ish (`disallow_untyped_defs`, `disallow_any_generics`) but ignores `tests.*`.
 - Version lives in `VERSION` (dynamic via setuptools) for this repo; generated projects use
   `__version__` in their package `__init__.py`.

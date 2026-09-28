@@ -7,19 +7,25 @@
     "files.exclude": {
         "**/__pycache__": true,
         ".mypy_cache": true,
-        ".pytest_cache": true
+        ".pytest_cache": true,
+        ".ruff_cache": true
     },
     "files.watcherExclude": {
         "**/__pycache__": true,
         ".mypy_cache": true,
-        ".pytest_cache": true
+        ".pytest_cache": true,
+        ".ruff_cache": true
     },
     // Python testing
     "python.testing.pytestArgs": ["tests"],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
-    // Python formatting (provided by the ms-python.black-formatter extension)
+    // Python linting and formatting (provided by the charliermarsh.ruff extension)
     "[python]": {
-        "editor.defaultFormatter": "ms-python.black-formatter"
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.codeActionsOnSave": {
+            "source.fixAll.ruff": "explicit",
+            "source.organizeImports.ruff": "explicit"
+        }
     }
 }

@@ -14,7 +14,6 @@
 ├── Makefile - Makefile containing the common commands for the project
 ├── README.md - README file
 ├── .reports - Contains the result of test runs in JUnit format, safe to delete
-├── .flake8 - Flake8 configuration file
 ├── .github - Folder containing github settings and files
 │ ├── ISSUE_TEMPLATE - Contains issue templates for bug report and questions
 │ ├── workflows - Github Actions workflows
@@ -37,8 +36,8 @@
 │ ├── integration - Contains the integration test files and data
 │ └── unit - Contains the unit test files for the project
 └── scripts - Contains utility bash files for checking, testing and releasing the project
-  ├── check-style.sh - Runs flake8, isort and black in check mode
-  ├── fix-style.sh - Applies black and isort
+  ├── check-style.sh - Runs ruff check and ruff format --check
+  ├── fix-style.sh - Applies ruff check --fix and ruff format
   ├── test-unit.sh - Runs the unit test suite
   ├── test-integration.sh - Runs the integration test suite
   ├── check-version.sh - Asserts a given tag matches __version__ (used by the release workflow)

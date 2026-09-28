@@ -3,5 +3,5 @@ set -e
 
 source ./scripts/include/vars.sh
 
-black .
-isort .
+ruff check --fix .
+ruff format .

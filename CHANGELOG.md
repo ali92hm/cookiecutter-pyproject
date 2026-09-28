@@ -14,6 +14,10 @@ The format is based on [Keep a Changelog] and this project adheres to
 
 ### Changed
 
+-   Replaced black, isort and flake8 with [ruff](https://docs.astral.sh/ruff/) for
+    linting, import sorting and formatting, in both the repo and the template. This
+    removes the `.flake8` file (ruff reads `pyproject.toml` natively) and collapses
+    `[tool.black]`/`[tool.isort]` into a single `[tool.ruff]` section
 -   Generated projects now use [PEP 639](https://peps.python.org/pep-0639/)
     `license`/`license-files` fields instead of the deprecated `license = {file = ...}`
     table and `License ::` classifiers; `_pypi_license_map` was renamed to
