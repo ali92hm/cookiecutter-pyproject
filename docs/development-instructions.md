@@ -20,7 +20,8 @@ After creating a virtual environment and **activating** it, you can run `make in
 
 There are several useful commands in the `Makefile`, here is how to use them:
 
--   `make init` installs all the dependencies in the `requirements.txt`
+-   `make init` installs the `dev` dependency group from `pyproject.toml` (needs
+    pip >= 25.1, for [PEP 735] `--group` support)
 -   `make clean` removes all the generated files and folders
 -   `make check-style` runs the linter and will print all the linting errors
 -   `make fix-style` attempts to fix all the fixable linting and style errors
@@ -66,3 +67,4 @@ anything.
 [pipenv]: https://pipenv.pypa.io/en/latest/
 [pyenv-virtualenv]: https://github.com/pyenv/pyenv-virtualenv
 [venv]: https://docs.python.org/3/library/venv.html
+[pep 735]: https://peps.python.org/pep-0735/

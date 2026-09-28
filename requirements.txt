@@ -1,8 +1,0 @@
-ruff==0.16.9
-mypy==1.20.2
-pytest==9.0.3
-pytest-cov==7.1.0
-build==1.4.4
-cookiecutter==2.7.1
-pytest-cookies==0.7.0
-tomli==2.4.1 # Only used by unit tests

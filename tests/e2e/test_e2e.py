@@ -18,6 +18,17 @@ def install_dep_and_run_ci(generated_project):
     env["VIRTUAL_ENV"] = str(venv_dir)
     env.pop("PYTHONHOME", None)
 
+    # The pip bundled via ensurepip in a fresh venv can be far behind the pip that
+    # provisioned this test environment (e.g. old enough to lack `--group`, PEP 735,
+    # which `make init` relies on). Upgrade it before using it.
+    python = venv_bin / ("python.exe" if os.name == "nt" else "python")
+    subprocess.run(
+        [str(python), "-m", "pip", "install", "--upgrade", "pip"],
+        cwd=project_path,
+        check=True,
+        env=env,
+    )
+
     subprocess.run("make init", cwd=project_path, shell=True, check=True, env=env)
     subprocess.run("make ci", cwd=project_path, shell=True, check=True, env=env)
     subprocess.run("make build", cwd=project_path, shell=True, check=True, env=env)

@@ -25,9 +25,10 @@ files that must be kept in sync by hand**. When changing tooling, dependency pin
 supported Python versions, CI actions, or docs, decide deliberately whether the change
 belongs in the outer repo, the template, or both — usually both.
 
-Known intentional divergences: the template's `Makefile` has `release`/`link` targets and no
-`test-e2e`; the template's `requirements.txt` adds `pytest-mock`/`twine`/`wheel` and drops
-`cookiecutter`/`pytest-cookies`/`tomli`; the template's `pyproject.toml` has
+Known intentional divergences: the template's `Makefile` has a `link` target and no
+`test-e2e`/`generate` (nothing to bake); the template's `[dependency-groups] dev` adds
+`pytest-mock` and drops `cookiecutter`/`pytest-cookies` (this repo's own baking/testing
+tools, meaningless inside a generated project); the template's `pyproject.toml` also has
 `[project.scripts]` and coverage config.
 
 ## Shell gotcha
@@ -54,7 +55,7 @@ selected by the `license` variable.
 ## Commands
 
 ```bash
-make init              # pip install -r requirements.txt
+make init              # pip install --group dev (needs pip>=25.1, PEP 735)
 make check-style       # ruff check + ruff format --check
 make fix-style         # ruff check --fix + ruff format
 make check-types       # mypy .
@@ -106,6 +107,8 @@ when the change could break the generated project's own tooling.
 - mypy is strict-ish (`disallow_untyped_defs`, `disallow_any_generics`) but ignores `tests.*`.
 - Version lives in `VERSION` (dynamic via setuptools) for this repo; generated projects use
   `__version__` in their package `__init__.py`.
-- Dependencies are pinned exactly (`==`) in both `requirements.txt` files.
+- Dependencies are pinned exactly (`==`) in `[dependency-groups] dev` in both
+  `pyproject.toml` files (PEP 735). No `requirements.txt` — `make init` is
+  `pip install --group dev`, which needs pip>=25.1.
 - Supported Python: >= 3.11; CI matrix is 3.11–3.14 across ubuntu/macOS/windows.
 - Default branch is `master`.

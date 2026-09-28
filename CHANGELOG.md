@@ -14,6 +14,11 @@ The format is based on [Keep a Changelog] and this project adheres to
 
 ### Changed
 
+-   Replaced `requirements.txt` with `[dependency-groups] dev` in `pyproject.toml`
+    ([PEP 735](https://peps.python.org/pep-0735/)), in both the repo and the template.
+    `make init` now runs `pip install --group dev`, which needs pip >= 25.1
+-   Dropped the `tomli` test dependency; `tests/integration/test_generator.py` now uses
+    the standard library `tomllib` (Python 3.11+)
 -   Replaced black, isort and flake8 with [ruff](https://docs.astral.sh/ruff/) for
     linting, import sorting and formatting, in both the repo and the template. This
     removes the `.flake8` file (ruff reads `pyproject.toml` natively) and collapses
