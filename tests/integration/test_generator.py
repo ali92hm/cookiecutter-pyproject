@@ -1,10 +1,10 @@
 import datetime
 import json
 import os
+import tomllib
 from pathlib import Path
 
 import pytest
-import tomli
 
 from hooks import pre_gen_project
 
@@ -90,7 +90,7 @@ def run_generated_project_assertions(generated_project, **kwargs):
         assert "LICENSE" in toplevel_files
     else:
         assert "LICENSE" not in toplevel_files
-    assert "requirements.txt" in toplevel_files
+    assert "requirements.txt" not in toplevel_files
     assert "CHANGELOG.md" in toplevel_files
     assert "Makefile" in toplevel_files
     assert "pyproject.toml" in toplevel_files
@@ -172,7 +172,7 @@ def run_generated_project_assertions(generated_project, **kwargs):
 
     # Project.toml file assertions
     with open(os.path.join(project_path, "pyproject.toml"), "rb") as pyproj_file:
-        project_metadata = tomli.load(pyproj_file)
+        project_metadata = tomllib.load(pyproj_file)
 
         assert project_metadata["project"]["name"] == project_name_snake_case.replace(
             "_", "-"
@@ -213,6 +213,10 @@ def run_generated_project_assertions(generated_project, **kwargs):
             project_metadata["project"]["scripts"][project_name_kebab_case]
             == f"{project_name_snake_case}.cli.entrypoint:main"
         )
+
+        # PEP 735 dev dependencies, in place of a requirements.txt
+        assert "ruff" in " ".join(project_metadata["dependency-groups"]["dev"])
+        assert "mypy" in " ".join(project_metadata["dependency-groups"]["dev"])
 
     # License file assertions
     if license != "Not open source":

@@ -8,8 +8,7 @@ cookiecutter-pyproject
 ├── CHANGELOG.md - CHANGELOG file containing the changes to the project
 ├── CODE_OF_CONDUCT.md - CODE_OF_CONDUCT file for interacting with this repo
 ├── CONTRIBUTING.md - Instructions for contributing to this project
-├── pyproject.toml - Contains the metadata for this python project as well as configuration for some of the tools
-├── requirements.txt - List of external python libraries that this project depends on
+├── pyproject.toml - Contains the metadata, tool configuration, and dev dependencies (`[dependency-groups]`) for this project
 ├── VERSION - The current version of this project, read dynamically by pyproject.toml
 ├── LICENSE - License file for this repo
 ├── Makefile - Makefile containing the common commands for the project

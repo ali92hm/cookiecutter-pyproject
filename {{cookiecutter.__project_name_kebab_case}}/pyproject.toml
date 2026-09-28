@@ -45,6 +45,16 @@ repository = "{{ cookiecutter.project_repo }}"
 [project.scripts]
 {{ cookiecutter.__project_name_kebab_case }} = "{{ cookiecutter.__project_name_snake_case }}.cli.entrypoint:main"
 
+[dependency-groups]
+dev = [
+  "ruff==0.16.9",
+  "mypy==1.20.2",
+  "pytest==9.0.3",
+  "pytest-cov==7.1.0",
+  "pytest-mock==3.15.1",
+  "build==1.4.4",
+]
+
 [build-system]
 build-backend = "setuptools.build_meta"
 requires = [

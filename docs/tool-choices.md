@@ -14,6 +14,9 @@ around, and why they were chosen.
     template generates.
 -   [build] is used as the PEP 517 build frontend (`python -m build`), rather than
     calling `setuptools` directly.
+-   Dev-only dependencies (ruff, mypy, pytest, ...) live in `[dependency-groups] dev` in
+    `pyproject.toml` ([PEP 735]) rather than a separate `requirements.txt`. `make init`
+    installs them with `pip install --group dev`, which needs pip >= 25.1.
 
 ## Linting, formatting and typing
 
@@ -33,8 +36,9 @@ around, and why they were chosen.
     plugin support.
 -   [pytest-cov] wires `coverage.py` into pytest so `make test-unit` reports coverage.
 -   This repo additionally uses [pytest-cookies] to bake the template with different
-    inputs and assert the generated output, and [tomli] to parse the generated
-    `pyproject.toml` in those assertions.
+    inputs and assert the generated output. The generated `pyproject.toml` in those
+    assertions is parsed with `tomllib`, the standard library TOML reader added in
+    Python 3.11.
 
 ## CI/CD
 
@@ -52,6 +56,7 @@ around, and why they were chosen.
 [pyproject.toml]: https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
 [pep 621]: https://peps.python.org/pep-0621/
 [pep 518]: https://peps.python.org/pep-0518/
+[pep 735]: https://peps.python.org/pep-0735/
 [setuptools]: https://setuptools.pypa.io/en/latest/
 [build]: https://build.pypa.io/en/stable/
 [ruff]: https://docs.astral.sh/ruff/
@@ -60,7 +65,6 @@ around, and why they were chosen.
 [pytest]: https://docs.pytest.org/en/stable/
 [pytest-cov]: https://pytest-cov.readthedocs.io/en/latest/
 [pytest-cookies]: https://pytest-cookies.readthedocs.io/en/latest/
-[tomli]: https://github.com/hukkin/tomli
 [dependabot]: https://docs.github.com/en/code-security/dependabot
 [cookiecutter]: https://github.com/cookiecutter/cookiecutter
 [development instructions]: ./development-instructions.md
